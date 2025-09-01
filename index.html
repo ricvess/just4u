@@ -1,257 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SAEY:Ly — JUST 36:9 U (Microsite)</title>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAEY:Ly Official</title>
   <style>
-    :root{ --bg:#0b0c10; --fg:#f2f2f2; --muted:#b7b7b7; --accent:#ffd86b; --accent2:#6df1ff; --card:#12141a; --glass: rgba(255,255,255,0.04); }
-    *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:Inter, 'Space Grotesk', system-ui, -apple-system; background:var(--bg); color:var(--fg); overflow-x:hidden}
-    /* Background + grain */
-    .bg{position:fixed;inset:0;z-index:-10;background:radial-gradient(800px 600px at 10% 10%, #14213d44 0%, transparent 60%), radial-gradient(900px 600px at 90% 30%, #f59e0b33 0%, transparent 60%), var(--bg);filter:saturate(1.05); animation:bgShift 16s ease-in-out infinite alternate}
-    @keyframes bgShift{to{filter:hue-rotate(18deg) saturate(1.15)}}
-    .grain{position:fixed;inset:0;z-index:-5;pointer-events:none;background:repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px)}
-
-    /* Layout */
-    header.hero{min-height:86vh;display:grid;place-items:center;padding:48px 20px;text-align:center}
-    .hero-inner{max-width:1100px;width:100%}
-    .logo{font-family:'Cinzel Decorative', serif;letter-spacing:.06em;margin:0}
-    .title-large{font-size:clamp(36px,7vw,84px);font-weight:900;color:var(--accent);text-shadow:0 12px 30px rgba(0,0,0,.6)}
-    .subtitle{margin-top:10px;font-size:clamp(14px,2.2vw,18px);color:var(--muted)}
-    .chipbar{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
-    .chip{padding:10px 14px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,0.06);cursor:pointer}
-
-    /* Container and cards */
-    .container{max-width:1100px;margin:0 auto;padding:20px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:22px;margin:20px 0}
-    h2.section{font-family:'Cinzel Decorative', serif;margin:0 0 12px 0}
-    p.lead{color:var(--muted);margin:0 0 10px}
-
-    /* Countdown */
-    .countdown{font-weight:700;font-size:20px;color:var(--accent);margin-top:12px}
-
-    /* Calendar grid */
-    .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
-    .cal-day{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;text-align:center;color:var(--muted)}
-    .cal-day.header{font-weight:700;color:var(--fg);background:transparent}
-    .cal-day.active{background:linear-gradient(180deg,var(--accent),rgba(255,255,255,0.02));color:#111;font-weight:700;box-shadow:0 8px 28px rgba(255,216,107,0.12)}
-
-    /* Vinyl player */
-    .vinyl-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
-    .vinyl{width:160px;height:160px;border-radius:50%;background:conic-gradient(#111 0 6%, #222 6% 12%, #111 12% 18%, #333 18% 24%, #111 24%);box-shadow:0 20px 60px rgba(0,0,0,.6);display:grid;place-items:center;position:relative}
-    .vinyl .label{width:62%;height:62%;border-radius:50%;background:linear-gradient(180deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#0b0c10;font-weight:700;font-size:12px}
-    .vinyl.playing{animation:spin 3s linear infinite}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .tonearm{width:160px;height:6px;background:linear-gradient(90deg,#bdbdbd,#777);border-radius:6px;transform-origin:left center;transform: rotate(-30deg);transition:transform .35s ease}
-    .tonearm.play{transform:rotate(-6deg)}
-
-    /* Store grid */
-    .store-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
-    .product{padding:14px;border-radius:12px;background:rgba(255,255,255,0.02);text-align:center}
-    .product img{width:100%;border-radius:10px;height:150px;object-fit:cover}
-    .price{font-weight:700;margin-top:8px}
-    .buy{margin-top:8px;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);cursor:pointer}
-
-    /* Dock */
-    .dock{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:10px;z-index:20}
-    .dock .panel{background:var(--card);border-radius:12px;padding:10px;border:1px solid rgba(255,255,255,0.06)}
-    .dock select{background:transparent;color:var(--fg);border:none;padding:6px;outline:none}
-
-    /* Confetti / easter egg */
-    .confetti{pointer-events:none;position:fixed;inset:0;z-index:30;overflow:hidden}
-    .confetti .piece{position:absolute;width:10px;height:16px;opacity:0.95}
-
-    /* Responsive small tweaks */
-    @media(max-width:760px){ .vinyl{width:120px;height:120px} .vinyl .label{font-size:11px} }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--text);
+      transition: all 0.4s ease;
+    }
+    header {
+      text-align: center;
+      padding: 20px;
+      background: var(--accent);
+      color: white;
+    }
+    h1 { margin: 0; font-size: 2.5rem; }
+    .theme-switcher, .countdown, .vinyl, .lyrics, .store, .chatbox, .playlist, .gallery, .quiz {
+      padding: 20px;
+      margin: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      background: var(--card);
+    }
+    .theme-switcher button {
+      margin: 5px;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .vinyl img { width: 150px; animation: spin 5s linear infinite; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+    .chatbox-messages {
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 10px;
+      background: #fafafa;
+    }
+    .gallery img { width: 100px; margin: 5px; border-radius: 10px; }
+    .quiz button { margin: 5px; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+    :root {
+      --bg: #fdfdfd;
+      --text: #222;
+      --accent: #ff4b4b;
+      --card: #fff;
+    }
+    .dark {
+      --bg: #121212;
+      --text: #f5f5f5;
+      --accent: #7d5fff;
+      --card: #1e1e1e;
+    }
+    .pastel {
+      --bg: #fffaf3;
+      --text: #333;
+      --accent: #ff9a76;
+      --card: #fff5eb;
+    }
   </style>
 </head>
-<body data-theme="dark">
-  <div class="bg"></div>
-  <div class="grain"></div>
-
-  <!-- Confetti container (easter egg) -->
-  <div id="confetti" class="confetti" aria-hidden="true"></div>
-
-  <header class="hero">
-    <div class="hero-inner">
-      <h1 class="logo title-large" id="logo">JUST 36:9 U</h1>
-      <div class="subtitle">“36 divide 9, and my heart just for you” — SAEY:Ly comeback</div>
-      <div class="countdown" id="countdown">Loading countdown...</div>
-      <div class="chipbar">
-        <div class="chip" id="enterBtn">Enter</div>
-        <div class="chip" id="replayAnim">Replay Title</div>
-        <a class="chip" href="#calendar">Calendar</a>
-        <a class="chip" href="#vinyl">Vinyl Player</a>
-        <a class="chip" href="#store">Store</a>
-      </div>
-    </div>
+<body>
+  <header>
+    <h1>SAEY:Ly Official</h1>
+    <p>Welcome to the soulful world 🌸🎶</p>
   </header>
 
-  <main class="container">
-    <!-- About & snippet -->
-    <section class="card" id="about">
-      <h2 class="section">About</h2>
-      <p class="lead">A retro‑indie single that plays on a tiny math twist — 36 ÷ 9 = 4 → "for". Personal, playful, and warm.</p>
-      <div class="divider"></div>
-      <div class="vinyl-wrap">
-        <div>
-          <div id="vinyl" class="vinyl" role="button" aria-pressed="false" title="Click to play / pause">
-            <div class="label">SAEY:Ly<br><small>Just 36:9 U</small></div>
-          </div>
-        </div>
-        <div style="flex:1;min-width:220px">
-          <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
-            <div id="playBtn" class="chip">▶ Play teaser</div>
-            <div id="pauseBtn" class="chip">⏸ Pause</div>
-            <div id="volWrap" style="display:flex;align-items:center;gap:8px;margin-left:8px"><label class="muted">Vol</label><input id="vol" type="range" min="0" max="1" step="0.01" value="1"></div>
-          </div>
-          <p class="muted">Click the vinyl to toggle play; when audio plays the disc animates like a record.</p>
-          <!-- Hidden audio element: add source file -->
-          <audio id="audio" preload="auto">
-            <!-- Example: <source src="/audio/just-369u-teaser.mp3" type="audio/mpeg"> -->
-          </audio>
-        </div>
-      </div>
-    </section>
+  <!-- Theme Switcher -->
+  <section class="theme-switcher">
+    <h2>🎨 Theme Switcher</h2>
+    <button onclick="setTheme('')">Default</button>
+    <button onclick="setTheme('dark')">Dark</button>
+    <button onclick="setTheme('pastel')">Pastel</button>
+  </section>
 
-    <!-- Calendar / Countdown -->
-    <section class="card" id="calendar">
-      <h2 class="section">Calendar & Countdown</h2>
-      <p class="lead">Mark important dates: teaser drop, single release, live stream. Click a date to set it as the countdown target.</p>
-      <div id="calendarGrid" class="calendar" aria-hidden="false"></div>
-      <div style="margin-top:14px">Selected date: <strong id="selectedDate">—</strong></div>
-    </section>
+  <!-- Countdown -->
+  <section class="countdown">
+    <h2>📅 Comeback Countdown</h2>
+    <p id="timer"></p>
+  </section>
 
-    <!-- Lyrics preview -->
-    <section class="card" id="lyrics">
-      <h2 class="section">Lyrics Preview</h2>
-      <p class="lead">Typewriter preview:</p>
-      <div id="typewriter" style="font-style:italic;font-size:18px;min-height:42px;color:var(--muted)"></div>
-    </section>
+  <!-- Vinyl Player -->
+  <section class="vinyl">
+    <h2>💿 Vinyl Player</h2>
+    <img src="https://i.ibb.co/4ZVtLz0/vinyl.png" alt="vinyl" />
+    <br>
+    <audio controls>
+      <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+  </section>
 
-    <!-- Store / Merch -->
-    <section class="card" id="store">
-      <h2 class="section">Merch Store (Mockup)</h2>
-      <p class="lead">This is a demo store layout. Add real e‑commerce links or connect to a payment provider when ready.</p>
-      <div class="store-grid" id="storeGrid">
-        <div class="product">
-          <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" alt="T-Shirt">
-          <div style="margin-top:8px">JUST 36:9 U Tee</div>
-          <div class="price">Rp 149.000</div>
-          <button class="buy" data-product="Tee">Buy</button>
-        </div>
-        <div class="product">
-          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800&auto=format&fit=crop" alt="Vinyl Mockup">
-          <div style="margin-top:8px">Limited Vinyl</div>
-          <div class="price">Rp 299.000</div>
-          <button class="buy" data-product="Vinyl">Buy</button>
-        </div>
-        <div class="product">
-          <img src="https://images.unsplash.com/photo-1511974035430-5de47d3b95da?q=80&w=800&auto=format&fit=crop" alt="Tote">
-          <div style="margin-top:8px">Canvas Tote</div>
-          <div class="price">Rp 89.000</div>
-          <button class="buy" data-product="Tote">Buy</button>
-        </div>
-      </div>
-    </section>
+  <!-- Lyrics Preview -->
+  <section class="lyrics">
+    <h2>📜 Lyrics Preview</h2>
+    <p><em>Under the starry night, our voices rise…</em></p>
+  </section>
 
-  </main>
+  <!-- Store -->
+  <section class="store">
+    <h2>🛍️ Official Store</h2>
+    <p><strong>SAEY:Ly T-Shirt</strong> – $25</p>
+    <p><strong>Vinyl Album</strong> – $40</p>
+    <button>Shop Now</button>
+  </section>
 
-  <footer style="text-align:center;padding:36px 12px;color:var(--muted)">© 2025 SAEY:Ly. All rights reserved.</footer>
+  <!-- Chatbox -->
+  <section class="chatbox">
+    <h2>💬 Fan Chatbox</h2>
+    <div class="chatbox-messages" id="chatMessages"></div>
+    <input type="text" id="chatInput" placeholder="Write a message..." />
+    <button onclick="sendMessage()">Send</button>
+  </section>
 
-  <!-- Control Dock -->
-  <div class="dock" aria-hidden="false">
-    <div class="panel">
-      <label for="themeSelect" style="font-size:12px;color:var(--muted);">Theme</label>
-      <select id="themeSelect">
-        <option value="dark">Dark Neon</option>
-        <option value="retro">Retro Pink</option>
-        <option value="beige">Indie Beige</option>
-        <option value="teal">Teal & Orange</option>
-        <option value="mono">Mono</option>
-      </select>
-    </div>
-    <div class="panel">
-      <label style="font-size:12px;color:var(--muted);">Floaties</label>
-      <input id="floatCount" type="range" min="0" max="30" value="10">
-    </div>
-  </div>
+  <!-- Playlist -->
+  <section class="playlist">
+    <h2>🎶 Playlist Player</h2>
+    <audio id="playlistPlayer" controls></audio>
+    <ul>
+      <li><button onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3')">Song 1</button></li>
+      <li><button onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3')">Song 2</button></li>
+      <li><button onclick="playSong('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3')">Song 3</button></li>
+    </ul>
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery">
+    <h2>📸 Gallery</h2>
+    <img src="https://i.ibb.co/5vF6m1h/gallery1.jpg" alt="gallery1" />
+    <img src="https://i.ibb.co/YW1W6mt/gallery2.jpg" alt="gallery2" />
+    <img src="https://i.ibb.co/XjzD1Tx/gallery3.jpg" alt="gallery3" />
+  </section>
+
+  <!-- Quiz -->
+  <section class="quiz">
+    <h2>🎮 Fan Quiz</h2>
+    <p>What does SAEY:Ly stand for?</p>
+    <button onclick="checkAnswer(true)">Soul And Energy, You: Lyrics</button>
+    <button onclick="checkAnswer(false)">Shining And Eternal Youth</button>
+    <p id="quizResult"></p>
+  </section>
 
   <script>
-    // ---------- Basic helpers ----------
-    const $ = sel => document.querySelector(sel);
-    const $$ = sel => Array.from(document.querySelectorAll(sel));
-
-    // ---------- Countdown target (default) ----------
-    let targetDate = new Date(); targetDate.setDate(targetDate.getDate()+14); // default 2 weeks
-    const countdownEl = document.getElementById('countdown');
-    function updateCountdown(){
-      const now = new Date().getTime();
-      const dist = targetDate.getTime() - now;
-      if(dist<=0){ countdownEl.textContent = 'Release is here!'; return }
-      const d = Math.floor(dist/(1000*60*60*24));
-      const h = Math.floor((dist%(1000*60*60*24))/(1000*60*60));
-      const m = Math.floor((dist%(1000*60*60))/(1000*60));
-      const s = Math.floor((dist%(1000*60))/1000);
-      countdownEl.textContent = `${d}d ${h}h ${m}m ${s}s until release`;
-    }
-    setInterval(updateCountdown,1000); updateCountdown();
-
-    // ---------- Typewriter lyrics ----------
-    const LYR = '36 divide 9, and my heart just for you';
-    const tw = document.getElementById('typewriter'); let li=0;
-    function type(){ if(li<=LYR.length){ tw.textContent = LYR.slice(0,li++); setTimeout(type,40 + Math.random()*80) } else { setTimeout(()=>{ li=0; tw.textContent=''; type() },1800) } }
-    type();
-
-    // ---------- Hero interactions & easter egg confetti ----------
-    const logo = document.getElementById('logo');
-    logo.addEventListener('click', ()=> triggerConfetti());
-
-    function triggerConfetti(){
-      const container = document.getElementById('confetti'); container.innerHTML='';
-      const colors = ['#ffd86b','#6df1ff','#ff9ad5','#9be7c4','#ffd1a9'];
-      for(let i=0;i<80;i++){ const p = document.createElement('div'); p.className='piece'; p.style.background=colors[i%colors.length]; p.style.left = (Math.random()*100)+'%'; p.style.top = '-10%'; p.style.transform = `rotate(${Math.random()*360}deg)`; p.style.animation = `fall ${2+Math.random()*1.8}s linear forwards ${Math.random()*0.2}s`; container.appendChild(p) }
-      // add keyframes runtime
-      const style = document.createElement('style'); style.textContent = `@keyframes fall{ to{ transform: translateY(120vh) rotate(360deg); opacity:0 } }`; document.head.appendChild(style);
-      setTimeout(()=> container.innerHTML = '', 3600);
+    // Theme Switcher
+    function setTheme(theme) {
+      document.body.className = theme;
     }
 
-    // ---------- Vinyl player ----------
-    const vinyl = document.getElementById('vinyl'); const audio = document.getElementById('audio'); const playBtn = document.getElementById('playBtn'); const pauseBtn = document.getElementById('pauseBtn');
-    function togglePlay(){ if(audio.paused){ audio.play(); vinyl.classList.add('playing'); vinyl.setAttribute('aria-pressed','true'); } else { audio.pause(); vinyl.classList.remove('playing'); vinyl.setAttribute('aria-pressed','false'); } }
-    vinyl.addEventListener('click', togglePlay); playBtn.addEventListener('click', ()=>{ if(audio.querySelector('source')) togglePlay(); else alert('Tambahkan file audio di elemen <audio> pada kode untuk memutar teaser.') }); pauseBtn.addEventListener('click', ()=>{ if(!audio.paused) togglePlay() });
-    document.getElementById('vol').addEventListener('input', e=>{ audio.volume = e.target.value });
+    // Countdown
+    const targetDate = new Date("2025-12-01T00:00:00").getTime();
+    setInterval(() => {
+      let now = new Date().getTime();
+      let distance = targetDate - now;
+      if (distance < 0) {
+        document.getElementById("timer").innerText = "✨ The comeback is here! ✨";
+        return;
+      }
+      let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      document.getElementById("timer").innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
 
-    // ---------- Calendar grid (this month) ----------
-    const cal = document.getElementById('calendarGrid'); function renderCalendar(year,month){ cal.innerHTML=''; const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; days.forEach(d=>{ const hd = document.createElement('div'); hd.className='cal-day header'; hd.textContent=d; cal.appendChild(hd) });
-      const first = new Date(year,month,1); const startDay = first.getDay(); const total = new Date(year,month+1,0).getDate();
-      for(let i=0;i<startDay;i++){ const empty = document.createElement('div'); empty.className='cal-day'; cal.appendChild(empty) }
-      for(let day=1;day<=total;day++){ const el = document.createElement('div'); el.className='cal-day'; el.textContent=day; el.tabIndex=0; el.addEventListener('click', ()=> selectDate(year,month,day,el)); cal.appendChild(el) }
+    // Chatbox
+    function sendMessage() {
+      const input = document.getElementById("chatInput");
+      const msg = input.value.trim();
+      if (msg === "") return;
+      const box = document.getElementById("chatMessages");
+      const p = document.createElement("p");
+      p.textContent = msg;
+      box.appendChild(p);
+      input.value = "";
     }
-    function selectDate(y,m,d,el){ // mark active
-      $$('.cal-day').forEach(n=>n.classList.remove('active')); el.classList.add('active'); const sel = new Date(y,m,d); targetDate = new Date(sel.getFullYear(), sel.getMonth(), sel.getDate(), 0,0,0); document.getElementById('selectedDate').textContent = sel.toDateString(); updateCountdown(); }
-    const today = new Date(); renderCalendar(today.getFullYear(), today.getMonth());
 
-    // ---------- Store buy buttons (mock) ----------
-    $$('#storeGrid .buy').forEach(btn=> btn.addEventListener('click', (e)=>{ const prod = e.target.dataset.product; alert(`Mock checkout: ${prod} — implement payment gateway to make this live.`) }));
+    // Playlist
+    function playSong(url) {
+      const player = document.getElementById("playlistPlayer");
+      player.src = url;
+      player.play();
+    }
 
-    // ---------- Theme & floaties ----------
-    const themeSelect = document.getElementById('themeSelect'); themeSelect.addEventListener('change', (e)=> setTheme(e.target.value));
-    function setTheme(name){ if(name==='retro'){ document.documentElement.style.setProperty('--bg','#1b0f17'); document.documentElement.style.setProperty('--accent','#ffa4d1'); document.documentElement.style.setProperty('--accent2','#ffd86b'); document.documentElement.style.setProperty('--muted','#ffdfe9'); } else if(name==='beige'){ document.documentElement.style.setProperty('--bg','#1a1816'); document.documentElement.style.setProperty('--accent','#d7b889'); document.documentElement.style.setProperty('--accent2','#a3e1d1'); document.documentElement.style.setProperty('--muted','#e9dccf'); } else if(name==='teal'){ document.documentElement.style.setProperty('--bg','#0f1b1a'); document.documentElement.style.setProperty('--accent','#f4a259'); document.documentElement.style.setProperty('--accent2','#2ec4b6'); document.documentElement.style.setProperty('--muted','#cdebe4'); } else if(name==='mono'){ document.documentElement.style.setProperty('--bg','#0f0f0f'); document.documentElement.style.setProperty('--accent','#f5f5f5'); document.documentElement.style.setProperty('--accent2','#bdbdbd'); document.documentElement.style.setProperty('--muted','#cfcfcf'); } else { document.documentElement.style.setProperty('--bg','#0b0c10'); document.documentElement.style.setProperty('--accent','#ffd86b'); document.documentElement.style.setProperty('--accent2','#6df1ff'); document.documentElement.style.setProperty('--muted','#b7b7b7'); } document.body.style.background = 'var(--bg)'; }
-    // Floaties
-    const floatCount = document.getElementById('floatCount'); function drawFloaties(n){ // small decorative elements around hero
-      const existing = document.getElementById('floatyWrap'); if(existing) existing.remove(); const wrap = document.createElement('div'); wrap.id='floatyWrap'; wrap.style.position='fixed'; wrap.style.inset='0'; wrap.style.pointerEvents='none'; wrap.style.zIndex=0; for(let i=0;i<n;i++){ const f = document.createElement('div'); f.style.position='absolute'; const size = 6 + Math.random()*28; f.style.width=size+'px'; f.style.height=size+'px'; f.style.left = Math.random()*100+'%'; f.style.top = Math.random()*70+'%'; f.style.borderRadius = Math.random()>0.6 ? '50%':'4px'; f.style.opacity = 0.6; f.style.background = ['#ffd86b','#6df1ff','#ff9ad5','#a3e1d1'][i%4]; f.style.filter='blur(.2px)'; f.style.transform = `translateY(0)`; f.animate([{transform:'translateY(0)'},{transform:`translateY(${20+Math.random()*80}px)`}],{duration:6000+Math.random()*9000,iterations:Infinity,direction:'alternate'}); wrap.appendChild(f) } document.body.appendChild(wrap); }
-    drawFloaties(parseInt(floatCount.value,10)); floatCount.addEventListener('input',(e)=> drawFloaties(parseInt(e.target.value,10)));
-
-    // ---------- Other small interactions ----------
-    document.getElementById('enterBtn').addEventListener('click', ()=> document.querySelector('#about').scrollIntoView({behavior:'smooth'}));
-    document.getElementById('replayAnim').addEventListener('click', ()=>{ triggerConfetti(); });
-
-    // Accessibility: keyboard for calendar
-    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getElementById('confetti').innerHTML=''; } });
-
-    // Done
+    // Quiz
+    function checkAnswer(correct) {
+      document.getElementById("quizResult").innerText = correct ? "✅ Correct! You're a true fan!" : "❌ Try again!";
+    }
   </script>
 </body>
 </html>
