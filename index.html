@@ -1,27 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SAEY:Ly — JUST 36:9 U (Official Microsite)</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>SAEY:Ly — JUST 36:9 U</title>
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
 /* ---------------------------
-   Core variables (kept original look)
+   Core look (kept original aesthetic)
    --------------------------- */
 :root{
-  --bg:#0b0c10;
-  --fg:#f2f2f2;
-  --muted:#b7b7b7;
-  --accent:#ffd86b;
-  --accent-2:#6df1ff;
-  --card:#12141a;
-  --shadow:rgba(0,0,0,.35);
-  --ring:rgba(255,216,107,.35);
-  --glass:rgba(255,255,255,0.02);
+  --bg:#0b0c10; --fg:#f2f2f2; --muted:#b7b7b7; --accent:#ffd86b; --accent-2:#6df1ff;
+  --card:#12141a; --shadow:rgba(0,0,0,.35); --ring:rgba(255,216,107,.35); --grain: rgba(255,255,255,0.03);
   --ease:cubic-bezier(.2,.9,.3,1);
   --content-width:1100px;
 }
@@ -30,59 +23,45 @@ html,body{height:100%}
 body{
   margin:0;
   font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-  color:var(--fg);
-  background:var(--bg);
+  color:var(--fg); background:var(--bg);
   -webkit-font-smoothing:antialiased;
   -moz-osx-font-smoothing:grayscale;
-  overflow-x:hidden;
   transition: background .45s var(--ease), color .45s var(--ease);
+  overflow-y:auto;
 }
 
-/* Background & grain (original aesthetic) */
-.bg{
-  position:fixed; inset:0; z-index:-20;
+/* background & grain */
+.bg{ position:fixed; inset:0; z-index:-20;
   background: radial-gradient(1200px 800px at 10% 10%, #1a2a6c 0%, transparent 60%),
-              radial-gradient(1000px 600px at 90% 30%, #fdbb2d55 0%, transparent 60%),
-              radial-gradient(900px 700px at 40% 90%, #22c1c355 0%, transparent 60%),
-              var(--bg);
+             radial-gradient(1000px 600px at 90% 30%, #fdbb2d55 0%, transparent 60%),
+             radial-gradient(900px 700px at 40% 90%, #22c1c355 0%, transparent 60%),
+             var(--bg);
   filter:saturate(1.05) contrast(1.05);
   animation:bgShift 18s ease-in-out infinite alternate;
 }
-@keyframes bgShift{ to { filter:hue-rotate(20deg) saturate(1.2); } }
+@keyframes bgShift{ to { filter:hue-rotate(20deg) saturate(1.2);} }
 .grain{ position:fixed; inset:0; pointer-events:none; z-index:-19;
-  background:
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.01) 0 1px, transparent 1px 3px);
+  background: repeating-linear-gradient(0deg, var(--grain) 0 1px, transparent 1px 3px),
+             repeating-linear-gradient(90deg, var(--grain) 0 1px, transparent 1px 3px);
   mix-blend-mode:soft-light;
 }
 
-/* ---------------------------
-   Hero (original preserved)
-   --------------------------- */
-header.hero{
-  min-height:92vh;
-  display:grid;
-  place-items:center;
-  text-align:center;
-  padding:48px 20px 24px;
-  position:relative;
-}
+/* hero (original preserved) */
+header.hero{ min-height:92vh; display:grid; place-items:center; text-align:center; padding:48px 20px 24px; position:relative; }
 .logo{ font-family:'Cinzel Decorative', serif; letter-spacing:.06em; text-shadow:0 10px 30px var(--shadow); }
 .title-stack{ line-height:1.06; }
 .title-giant{ font-size:clamp(40px,8vw,92px); font-weight:900; margin:0; color:var(--accent); filter:drop-shadow(0 12px 40px var(--shadow)); transition:opacity .5s var(--ease), transform .5s var(--ease); }
 .title-alt{ font-size:clamp(22px,3.4vw,40px); margin:10px 0 0; color:var(--accent-2); opacity:.92; transition:opacity .5s var(--ease), transform .5s var(--ease); }
 .subtitle{ margin-top:16px; font-size:clamp(14px,2.2vw,18px); color:var(--muted); }
 
-/* chip navigation */
+/* nav chips */
 .chipbar{ display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap; margin-top:26px; }
-.chip{ border:1px solid var(--ring); color:var(--fg); background:var(--glass); padding:10px 14px; border-radius:999px; backdrop-filter:blur(4px); cursor:pointer; transition:transform .15s var(--ease), background .2s var(--ease); box-shadow:0 10px 20px -10px var(--shadow); text-decoration:none; }
-.chip:hover{ transform:translateY(-3px); background:var(--glass); }
+.chip{ border:1px solid var(--ring); color:var(--fg); background:rgba(255,255,255,.02); padding:10px 14px; border-radius:999px; backdrop-filter: blur(4px); cursor:pointer; transition:transform .15s var(--ease), background .2s var(--ease); box-shadow:0 10px 20px -10px var(--shadow); text-decoration:none; }
+.chip:hover{ transform:translateY(-2px); background:rgba(255,255,255,.04); }
 .chip.active{ border-color:var(--accent); box-shadow:0 12px 30px -8px var(--shadow); }
 
-/* ---------------------------
-   Page container + card
-   --------------------------- */
-main{ max-width:var(--content-width); margin: 0 auto 80px; padding: 20px; }
+/* main container + card */
+main{ max-width:var(--content-width); margin:0 auto; padding:20px; }
 .section-card{
   background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
   border:1px solid rgba(255,255,255,.08);
@@ -94,11 +73,9 @@ main{ max-width:var(--content-width); margin: 0 auto 80px; padding: 20px; }
 .section-card.visible{ opacity:1; transform:translateY(0); }
 .section-title{ font-family:'Cinzel Decorative', serif; font-size:clamp(20px,2.6vw,30px); color:var(--accent); margin-bottom:10px; }
 
-/* ---------------------------
-   Vinyl & player styling
-   --------------------------- */
+/* vinyl + player */
 .vinyl-row{ display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
-.vinyl{ width:180px; height:180px; border-radius:50%; border:8px solid rgba(0,0,0,.6); background:radial-gradient(circle,#111 30%, #222 70%); position:relative; display:grid; place-items:center; transition:transform .3s var(--ease); }
+.vinyl{ width:180px; height:180px; border-radius:50%; border:8px solid rgba(0,0,0,.6); background:radial-gradient(circle,#111 30%, #222 70%); position:relative; display:grid; place-items:center; transition:transform .3s var(--ease); cursor:pointer; }
 .vinyl.playing{ animation:spin 3.6s linear infinite; }
 @keyframes spin{ to{ transform: rotate(360deg); } }
 .vinyl .label{ width:68px; height:68px; border-radius:50%; display:grid; place-items:center; color:#0b0c10; font-weight:700; font-size:11px; background:linear-gradient(180deg,var(--accent),var(--accent-2)); box-shadow: inset 0 -6px 18px rgba(0,0,0,.12); text-align:center; padding:8px; line-height:1; }
@@ -108,37 +85,26 @@ main{ max-width:var(--content-width); margin: 0 auto 80px; padding: 20px; }
 .btn:hover{ transform:translateY(-3px); box-shadow:0 14px 28px -18px var(--shadow); }
 .select{ padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.06); background:transparent; color:var(--fg); }
 
-/* ---------------------------
-   Lyrics
-   --------------------------- */
+/* lyrics */
 .typewriter{ font-size:clamp(16px,2.2vw,20px); font-style:italic; border-right:2px solid var(--accent); white-space:nowrap; overflow:hidden; padding-right:6px; }
 
-/* ---------------------------
-   Gallery
-   --------------------------- */
+/* gallery */
 .gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; }
 .gallery-grid img{ width:100%; height:140px; object-fit:cover; border-radius:12px; cursor:pointer; }
 
-/* ---------------------------
-   Calendar
-   --------------------------- */
+/* calendar */
 .calendar-grid{ display:grid; grid-template-columns: repeat(7, 1fr); gap:8px; margin-top:10px; }
 .cal-cell{ padding:8px; border-radius:8px; text-align:center; background:linear-gradient(180deg, rgba(255,255,255,.02), transparent); border:1px solid rgba(255,255,255,.03); cursor:pointer; font-size:14px; }
 .cal-cell.active{ background:linear-gradient(180deg,var(--accent), rgba(255,255,255,.02)); color:#111; font-weight:700; box-shadow:0 10px 30px rgba(0,0,0,.2); }
 
-/* ---------------------------
-   Store
-   --------------------------- */
+/* store */
 .store-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; margin-top:12px; }
 .store-item{ padding:10px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.06); text-align:center; }
 .store-item img{ width:100%; height:140px; object-fit:cover; border-radius:8px; }
 
-/* cart panel */
 .cart-panel{ margin-top:12px; padding:10px; border-radius:10px; background:rgba(0,0,0,.12); }
 
-/* ---------------------------
-   Dock
-   --------------------------- */
+/* dock */
 .dock{ position:fixed; right:16px; bottom:16px; display:flex; gap:10px; flex-direction:column; z-index:40; }
 .dock .panel{ background:var(--card); border:1px solid rgba(255,255,255,.08); padding:10px; border-radius:12px; }
 
@@ -146,24 +112,23 @@ main{ max-width:var(--content-width); margin: 0 auto 80px; padding: 20px; }
 #modal{ position:fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,0.6); z-index:80; }
 #modal .content{ background:var(--card); padding:18px; border-radius:12px; max-width:92%; max-height:92%; overflow:auto; }
 
-/* responsive tweaks */
+/* responsive */
 @media(max-width:880px){ .vinyl{ width:140px; height:140px } .title-giant{ font-size:44px } .vinyl-row{ flex-direction:column; align-items:center } }
   </style>
 </head>
 <body data-theme="dark-neon">
 
-  <!-- background layers -->
   <div class="bg" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
-  <!-- floaties -->
+  <!-- floaties container -->
   <div id="floaties" aria-hidden="true"></div>
 
-  <!-- HERO (unchanged appearance) -->
+  <!-- HERO -->
   <header class="hero" role="banner">
     <div class="title-stack logo" id="heroTitle" tabindex="0" role="button">
       <h1 class="title-giant" id="phase1">36 ÷ 9</h1>
-      <h2 class="title-alt" id="phase2" style="opacity:0; transform: translateY(6px);">equals <span style="font-variant-numeric:lining-nums">4</span></h2>
+      <h2 class="title-alt" id="phase2" style="opacity:0; transform: translateY(6px);">equals <span style="font-variant-numeric: lining-nums;">4</span></h2>
       <h1 class="title-giant" id="phase3" style="display:none;">JUST 36:9 U</h1>
       <h1 class="title-giant" id="phase4" style="display:none;">JUST FOR U</h1>
       <div class="subtitle">“36 divide 9, and my heart just for you”</div>
@@ -188,7 +153,7 @@ main{ max-width:var(--content-width); margin: 0 auto 80px; padding: 20px; }
       <div style="height:12px"></div>
 
       <div class="vinyl-row">
-        <div id="vinyl" class="vinyl" aria-hidden="false" title="Click to play/pause">
+        <div id="vinyl" class="vinyl" title="Click to play/pause" aria-hidden="false">
           <div id="vinylLabel" class="label">SAEY:Ly</div>
         </div>
 
@@ -206,7 +171,7 @@ main{ max-width:var(--content-width); margin: 0 auto 80px; padding: 20px; }
             <!-- local audio element -->
             <audio id="audio" preload="metadata"></audio>
 
-            <!-- Spotify embed (compact height) -->
+            <!-- Spotify embed (compact) -->
             <div style="margin-top:14px;">
               <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/2sZYutAwhMODqCaS0mYj4Z?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
             </div>
@@ -285,14 +250,13 @@ main{ max-width:var(--content-width); margin: 0 auto 80px; padding: 20px; }
 
   <script>
 /* ======================
-   DATA: songs, gallery, store, events
-   Centralized for easy edits
+   Data (centralized)
    ====================== */
 const DATA = {
-  songs: [
-    { id:'t0', title:'Just 36:9 U — Teaser', src:'', cover:'https://images.unsplash.com/photo-1534790566855-4cb788d389ec?q=80&w=800&auto=format&fit=crop', lyrics:'36 divide 9, and my heart just for you\nWe whisper soft where night is new\n' },
-    { id:'t1', title:'Retro Night', src:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', cover:'https://images.unsplash.com/photo-1495185100296-6f4f4fb35f3e?q=80&w=800&auto=format&fit=crop', lyrics:'Retro lights and velvet skies\nDancing slow with open eyes\n' },
-    { id:'t2', title:'Morning For U', src:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', cover:'https://images.unsplash.com/photo-1507878866276-a947ef722fee?q=80&w=800&auto=format&fit=crop', lyrics:'I write these days for you alone\nSimple chords and steady tone\n' }
+  songs:[
+    {id:'s0', title:'Just 36:9 U — Teaser', src:'', cover:'https://images.unsplash.com/photo-1534790566855-4cb788d389ec?q=80&w=800&auto=format&fit=crop', lyrics:'36 divide 9, and my heart just for you\nWe whisper soft where night is new\n' },
+    {id:'s1', title:'Retro Night', src:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', cover:'https://images.unsplash.com/photo-1495185100296-6f4f4fb35f3e?q=80&w=800&auto=format&fit=crop', lyrics:'Retro lights and velvet skies\nDancing slow with open eyes\n' },
+    {id:'s2', title:'Morning For U', src:'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', cover:'https://images.unsplash.com/photo-1507878866276-a947ef722fee?q=80&w=800&auto=format&fit=crop', lyrics:'I write these days for you alone\nSimple chords and steady tone\n' }
   ],
   gallery:[
     'https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=1200&auto=format&fit=crop',
@@ -300,26 +264,26 @@ const DATA = {
     'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop'
   ],
   store:[
-    { id:'h', title:'JUST 36:9 U Tee', price:149000, img:'https://images.unsplash.com/photo-1585386959984-a4155225f0f5?q=80&w=800&auto=format&fit=crop' },
-    { id:'v', title:'Limited Vinyl', price:299000, img:'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop' },
-    { id:'t', title:'Canvas Tote', price:89000, img:'https://images.unsplash.com/photo-1520975912826-0e7c11c0b6db?q=80&w=800&auto=format&fit=crop' }
+    {id:'h', title:'JUST 36:9 U Tee', price:149000, img:'https://images.unsplash.com/photo-1585386959984-a4155225f0f5?q=80&w=800&auto=format&fit=crop'},
+    {id:'v', title:'Limited Vinyl', price:299000, img:'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop'},
+    {id:'t', title:'Canvas Tote', price:89000, img:'https://images.unsplash.com/photo-1520975912826-0e7c11c0b6db?q=80&w=800&auto=format&fit=crop'}
   ],
   events:[
-    { date:'2025-09-20', title:'Teaser Drop' },
-    { date:'2025-10-05', title:'Single Release' },
-    { date:'2025-11-01', title:'Merch Drop' }
+    {date:'2025-09-20', title:'Teaser Drop'},
+    {date:'2025-10-05', title:'Single Release'},
+    {date:'2025-11-01', title:'Merch Drop'}
   ]
 };
 
 /* ======================
-   Helpers & shortcuts
+   Utils
    ====================== */
 const $ = s => document.querySelector(s);
 const $$ = s => Array.from(document.querySelectorAll(s));
 function fmtCurrency(x){ return 'Rp ' + x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
 
 /* ======================
-   Init elements
+   Elements & state
    ====================== */
 const playlistSelect = $('#playlistSelect');
 const audio = $('#audio');
@@ -333,53 +297,44 @@ const cartTotal = $('#cartTotal');
 const countdownDisplay = $('#countdownDisplay');
 const calendarGrid = $('#calendarGrid');
 const modal = $('#modal');
-let cart = [];
-let currentSongIndex = 0;
-let countdownTarget = null;
+let cart = [], currentSongIndex = 0, countdownTarget = null;
 
 /* ======================
-   Populate playlist select
+   Populate playlist & UI
    ====================== */
 function populatePlaylist(){
   playlistSelect.innerHTML = '';
   DATA.songs.forEach((s, i)=>{
-    const opt = document.createElement('option');
-    opt.value = i; opt.textContent = s.title;
+    const opt = document.createElement('option'); opt.value = i; opt.textContent = s.title;
     playlistSelect.appendChild(opt);
   });
 }
 populatePlaylist();
 
-/* ======================
-   Set current song (cover, lyrics, src)
-   ====================== */
-function setSong(index){
-  currentSongIndex = index;
-  const s = DATA.songs[index];
-  // vinyl cover as background image but keep dark ring
+function setSong(i){
+  currentSongIndex = i;
+  const s = DATA.songs[i];
+  // vinyl visual: set background image + keep label
   vinyl.style.background = `radial-gradient(circle at 28% 28%, rgba(255,255,255,0.02), transparent 20%), url('${s.cover}')`;
   vinyl.style.backgroundSize = 'cover';
-  vinylLabel.textContent = s.title.split(' — ')[0] || 'SAEY:Ly';
+  vinylLabel.textContent = s.title.split(' — ')[0]||'SAEY:Ly';
 
-  // set audio src
+  // audio src
   audio.innerHTML = '';
   if(s.src){
-    const srcEl = document.createElement('source');
-    srcEl.src = s.src; srcEl.type = 'audio/mpeg';
-    audio.appendChild(srcEl);
+    const source = document.createElement('source'); source.src = s.src; source.type = 'audio/mpeg';
+    audio.appendChild(source);
     audio.load();
   }
-  // update lyrics
+  // lyrics
   startTypewriter(s.lyrics || 'Lyrics not available for this track.');
-  playlistSelect.value = index;
+  playlistSelect.value = i;
 }
 setSong(0);
 
-/* ======================
-   Play controls
-   ====================== */
+/* play / controls */
 function playIfAvailable(){
-  if(!audio.querySelector('source')){ alert('No local audio snippet for this track. Use Spotify embed if available.'); return; }
+  if(!audio.querySelector('source')){ alert('No local audio snippet for this track. Use Spotify embed if needed.'); return; }
   audio.play();
 }
 $('#playBtnMain').addEventListener('click', ()=>{
@@ -388,25 +343,22 @@ $('#playBtnMain').addEventListener('click', ()=>{
 });
 $('#prevBtn').addEventListener('click', ()=>{ currentSongIndex = (currentSongIndex - 1 + DATA.songs.length) % DATA.songs.length; setSong(currentSongIndex); playIfAvailable(); });
 $('#nextBtn').addEventListener('click', ()=>{ currentSongIndex = (currentSongIndex + 1) % DATA.songs.length; setSong(currentSongIndex); playIfAvailable(); });
-playlistSelect.addEventListener('change', e=>{ setSong(parseInt(e.target.value,10)); });
+playlistSelect.addEventListener('change', e=> setSong(parseInt(e.target.value,10)));
 
 audio.addEventListener('play', ()=> vinyl.classList.add('playing'));
 audio.addEventListener('pause', ()=> vinyl.classList.remove('playing'));
-vinyl.addEventListener('click', ()=>{
-  if(!audio.querySelector('source')){ alert('No local snippet for this track. Use Spotify embed below.'); return; }
-  if(audio.paused) audio.play(); else audio.pause();
-});
+vinyl.addEventListener('click', ()=>{ if(!audio.querySelector('source')){ alert('No local snippet for this track.'); return; } if(audio.paused) audio.play(); else audio.pause(); });
 
 /* ======================
-   Typewriter lyrics
+   Typewriter (lyrics)
    ====================== */
-let typeTimeout = null;
+let typingTimer = null;
 function startTypewriter(text){
-  clearTimeout(typeTimeout);
-  let i=0; lyricsText.textContent = '';
+  clearTimeout(typingTimer);
+  let i = 0; lyricsText.textContent = '';
   function step(){
-    if(i <= text.length){ lyricsText.textContent = text.slice(0,i++); typeTimeout = setTimeout(step, 20 + Math.random()*40); }
-    else { typeTimeout = setTimeout(()=>{ i=0; lyricsText.textContent=''; typeTimeout = setTimeout(step, 500); }, 1700); }
+    if(i <= text.length){ lyricsText.textContent = text.slice(0, i++); typingTimer = setTimeout(step, 20 + Math.random()*40); }
+    else { typingTimer = setTimeout(()=>{ i=0; lyricsText.textContent=''; typingTimer = setTimeout(step, 500); }, 1600); }
   }
   step();
 }
@@ -414,21 +366,19 @@ function startTypewriter(text){
 /* ======================
    Gallery populate & modal
    ====================== */
-DATA.gallery.forEach((u, idx)=>{
-  const img = document.createElement('img');
-  img.src = u; img.alt = `Gallery ${idx+1}`;
+DATA.gallery.forEach((u, idx)=> {
+  const img = document.createElement('img'); img.src = u; img.alt = `Gallery ${idx+1}`;
   img.addEventListener('click', ()=> openModal(`<img src="${u}" style="max-width:100%;height:auto;border-radius:12px">`));
   galleryGrid.appendChild(img);
 });
 function openModal(html){
-  modal.style.display = 'grid';
-  modal.querySelector('.content').innerHTML = html;
+  modal.style.display = 'grid'; modal.querySelector('.content').innerHTML = html;
 }
 $('#modalClose').addEventListener('click', ()=>{ modal.style.display='none'; });
 modal.addEventListener('click', e=>{ if(e.target===modal) modal.style.display='none'; });
 
 /* ======================
-   Render calendar (current month) & events
+   Calendar render & events
    ====================== */
 function renderCalendar(year, month){
   calendarGrid.innerHTML = '';
@@ -437,19 +387,14 @@ function renderCalendar(year, month){
   const first = new Date(year, month, 1);
   const start = first.getDay();
   const total = new Date(year, month+1, 0).getDate();
-  for(let i=0;i<start;i++){ const e = document.createElement('div'); e.className='cal-cell'; calendarGrid.appendChild(e); }
+  for(let i=0;i<start;i++){ const e=document.createElement('div'); e.className='cal-cell'; calendarGrid.appendChild(e); }
   for(let d=1; d<=total; d++){
-    const el = document.createElement('div'); el.className='cal-cell'; el.textContent = d;
-    const yyyy = year, mm = String(month+1).padStart(2,'0'), dd = String(d).padStart(2,'0');
+    const el=document.createElement('div'); el.className='cal-cell'; el.textContent=d;
+    const yyyy = year; const mm = String(month+1).padStart(2,'0'); const dd = String(d).padStart(2,'0');
     const iso = `${yyyy}-${mm}-${dd}`;
     const ev = DATA.events.find(ev=>ev.date===iso);
-    if(ev){
-      const badge = document.createElement('div'); badge.textContent = ev.title; badge.style.marginTop='6px'; badge.style.fontSize='12px'; badge.style.padding='3px 6px'; badge.style.borderRadius='8px'; badge.style.background='linear-gradient(90deg,var(--accent),var(--accent-2))'; badge.style.color='#111'; el.appendChild(badge);
-    }
-    el.addEventListener('click', ()=> {
-      countdownTarget = new Date(yyyy, month, d, 0, 0, 0);
-      updateCountdown(); $$('.cal-cell').forEach(c=>c.classList.remove('active')); el.classList.add('active');
-    });
+    if(ev){ const badge=document.createElement('div'); badge.textContent=ev.title; badge.style.marginTop='6px'; badge.style.fontSize='12px'; badge.style.padding='4px 6px'; badge.style.borderRadius='8px'; badge.style.background='linear-gradient(90deg,var(--accent),var(--accent-2))'; badge.style.color='#111'; el.appendChild(badge); }
+    el.addEventListener('click', ()=>{ countdownTarget = new Date(yyyy, month, d, 0,0,0); updateCountdown(); $$('.cal-cell').forEach(c=>c.classList.remove('active')); el.classList.add('active'); });
     calendarGrid.appendChild(el);
   }
 }
@@ -457,11 +402,11 @@ const now = new Date();
 renderCalendar(now.getFullYear(), now.getMonth());
 
 /* ======================
-   Countdown
+   Countdown logic
    ====================== */
 let countdownInterval = null;
 function updateCountdown(){
-  if(!countdownTarget){ countdownDisplay.textContent = 'Select a date from the calendar (or event will be set by default).'; return; }
+  if(!countdownTarget){ countdownDisplay.textContent = 'Select a date from the calendar.'; return; }
   if(countdownInterval) clearInterval(countdownInterval);
   function tick(){
     const diff = countdownTarget.getTime() - Date.now();
@@ -472,50 +417,44 @@ function updateCountdown(){
     const s = Math.floor((diff%(1000*60))/1000);
     countdownDisplay.textContent = `${d}d ${h}h ${m}m ${s}s until event`;
   }
-  tick();
-  countdownInterval = setInterval(tick,1000);
+  tick(); countdownInterval = setInterval(tick,1000);
 }
-// default to first event if available
 if(DATA.events.length){ countdownTarget = new Date(DATA.events[0].date); updateCountdown(); }
 
 /* ======================
-   Store populate + cart + checkout demo
+   Store / cart
    ====================== */
-DATA.store.forEach(it=>{
-  const wrap = document.createElement('div'); wrap.className='store-item';
-  wrap.innerHTML = `<img src="${it.img}" alt="${it.title}"><div style="font-weight:700;margin-top:8px">${it.title}</div><div class="muted" style="margin-top:6px">${fmtCurrency(it.price)}</div><div style="margin-top:8px"><button class="btn addBtn" data-id="${it.id}">Add to cart</button></div>`;
-  storeGrid.appendChild(wrap);
+DATA.store.forEach(it => {
+  const w = document.createElement('div'); w.className='store-item';
+  w.innerHTML = `<img src="${it.img}" alt="${it.title}"><div style="font-weight:700;margin-top:8px">${it.title}</div><div class="muted" style="margin-top:6px">${fmtCurrency(it.price)}</div><div style="margin-top:8px"><button class="btn addBtn" data-id="${it.id}">Add to cart</button></div>`;
+  storeGrid.appendChild(w);
 });
 storeGrid.addEventListener('click', e=>{
   const b = e.target.closest('button.addBtn'); if(!b) return;
   const id = b.dataset.id; const item = DATA.store.find(x=>x.id===id);
-  if(item){ cart.push(item); renderCart(); openModal(`<div style="text-align:center"><h3>Added to cart</h3><p>${item.title}</p><p style="margin-top:8px">${fmtCurrency(item.price)}</p></div>`); setTimeout(()=>{ modal.style.display='none'; },800); }
+  if(item){ cart.push(item); renderCart(); openModal(`<div style="text-align:center"><h3>Added to cart</h3><p>${item.title}</p><p style="margin-top:8px">${fmtCurrency(item.price)}</p></div>`); setTimeout(()=>{ modal.style.display='none'; },900); }
 });
-function renderCart(){
-  cartList.innerHTML=''; let sum=0;
-  cart.forEach((c, idx)=>{ const row = document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.padding='6px 0'; row.innerHTML = `<div>${c.title}</div><div>${fmtCurrency(c.price)} <button data-idx="${idx}" style="margin-left:8px;border:none;background:transparent;color:var(--accent);cursor:pointer">Remove</button></div>`; cartList.appendChild(row); sum+=c.price; });
-  cartTotal.textContent = `Total: ${fmtCurrency(sum)}`;
-}
+function renderCart(){ cartList.innerHTML=''; let sum=0; cart.forEach((c, idx)=>{ const row=document.createElement('div'); row.style.display='flex'; row.style.justifyContent='space-between'; row.style.padding='6px 0'; row.innerHTML=`<div>${c.title}</div><div>${fmtCurrency(c.price)} <button data-idx="${idx}" style="margin-left:8px;border:none;background:transparent;color:var(--accent);cursor:pointer">Remove</button></div>`; cartList.appendChild(row); sum+=c.price; }); cartTotal.textContent = `Total: ${fmtCurrency(sum)}`; }
 cartList.addEventListener('click', e=>{ const rem = e.target.closest('button'); if(!rem) return; const idx = parseInt(rem.dataset.idx,10); cart.splice(idx,1); renderCart(); });
-
 $('#checkoutBtn').addEventListener('click', ()=>{
   if(cart.length===0){ alert('Cart kosong — tambahkan item dulu.'); return; }
   const items = cart.map(i=>`<li>${i.title} — ${fmtCurrency(i.price)}</li>`).join('');
   openModal(`<div style="padding:12px"><h3>Mock Checkout</h3><ul>${items}</ul><p style="margin-top:8px">${fmtCurrency(cart.reduce((s,it)=>s+it.price,0))}</p><div style="margin-top:12px"><button id="confirmOrder" class="btn">Place Order (Demo)</button></div></div>`);
-  setTimeout(()=>{ $('#confirmOrder')?.addEventListener('click', ()=>{ openModal('<div style="text-align:center"><h3>Order placed!</h3><p>Thanks — this is a demo.</p></div>'); cart=[]; renderCart(); setTimeout(()=>{ modal.style.display='none'; },1000); }); },100);
+  setTimeout(()=>{ $('#confirmOrder')?.addEventListener('click', ()=>{ openModal('<div style="text-align:center"><h3>Order placed!</h3><p>Thanks — this is a demo.</p></div>'); cart=[]; renderCart(); setTimeout(()=>{ modal.style.display='none'; },900); }); },50);
 });
 
 /* ======================
-   Theme switching: visual bg tweaks
+   Theme select (visual adjustments)
    ====================== */
 $('#themeSelect').addEventListener('change', e=>{
-  const v = e.target.value;
-  document.body.setAttribute('data-theme', v);
-  if(v==='retro-pink'){ document.querySelector('.bg').style.background = 'radial-gradient(1000px 600px at 15% 15%, #ff7eb399 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #ffd86b55 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #ffb6c199 0%, transparent 60%), #1b0f17'; }
-  else if(v==='indie-beige'){ document.querySelector('.bg').style.background = 'radial-gradient(1100px 700px at 20% 20%, #d7b88988 0%, transparent 60%), radial-gradient(900px 600px at 80% 30%, #a3e1d188 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #6c584c66 0%, transparent 60%), #1a1816'; }
-  else if(v==='teal-orange'){ document.querySelector('.bg').style.background = 'radial-gradient(1000px 600px at 15% 15%, #2ec4b6aa 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #f4a25988 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #3a506baa 0%, transparent 60%), #0f1b1a'; }
-  else if(v==='mono-minimal'){ document.querySelector('.bg').style.background = 'radial-gradient(1000px 600px at 15% 15%, #ffffff18 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #ffffff10 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #ffffff0e 0%, transparent 60%), #0f0f0f'; }
-  else { document.querySelector('.bg').style.background = ''; }
+  const v = e.target.value; document.body.setAttribute('data-theme', v);
+  // small bg visual tweaks for theme variants
+  const bg = document.querySelector('.bg');
+  if(v==='retro-pink'){ bg.style.background = 'radial-gradient(1000px 600px at 15% 15%, #ff7eb399 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #ffd86b55 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #ffb6c199 0%, transparent 60%), #1b0f17'; }
+  else if(v==='indie-beige'){ bg.style.background = 'radial-gradient(1100px 700px at 20% 20%, #d7b88988 0%, transparent 60%), radial-gradient(900px 600px at 80% 30%, #a3e1d188 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #6c584c66 0%, transparent 60%), #1a1816'; }
+  else if(v==='teal-orange'){ bg.style.background = 'radial-gradient(1000px 600px at 15% 15%, #2ec4b6aa 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #f4a25988 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #3a506baa 0%, transparent 60%), #0f1b1a'; }
+  else if(v==='mono-minimal'){ bg.style.background = 'radial-gradient(1000px 600px at 15% 15%, #ffffff18 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #ffffff10 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #ffffff0e 0%, transparent 60%), #0f0f0f'; }
+  else { bg.style.background = ''; }
 });
 
 /* ======================
@@ -539,65 +478,47 @@ drawFloaties(parseInt($('#shapeCount').value,10));
 $('#shapeCount').addEventListener('input', e=> drawFloaties(parseInt(e.target.value,10)));
 
 /* ======================
-   Scroll reveal
+   Scroll reveal + hero animation re-run
    ====================== */
-function revealOnScroll(){ document.querySelectorAll('.section-card').forEach(card=>{ const r = card.getBoundingClientRect(); if(r.top < window.innerHeight - 80) card.classList.add('visible'); }); }
+function revealOnScroll(){ document.querySelectorAll('.section-card').forEach(card=>{ const r=card.getBoundingClientRect(); if(r.top < window.innerHeight - 80) card.classList.add('visible'); }); }
 window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('load', ()=>{ revealOnScroll(); initUI(); });
+window.addEventListener('load', ()=>{ revealOnScroll(); populateInitial(); });
+
+/* hero staged animation (preserved) */
+const p1 = $('#phase1'), p2 = $('#phase2'), p3 = $('#phase3'), p4 = $('#phase4');
+function heroSequence(){
+  setTimeout(()=>{ p2.style.transition='all .8s ease'; p2.style.opacity='1'; p2.style.transform='translateY(0)'; }, 900);
+  setTimeout(()=>{ p1.style.transition='opacity .5s ease'; p2.style.transition='opacity .5s ease, transform .5s ease'; p1.style.opacity='0'; p2.style.opacity='0';
+    setTimeout(()=>{ p1.style.display='none'; p2.style.display='none'; p3.style.display='block'; p3.style.opacity='0'; requestAnimationFrame(()=>{ p3.style.transition='opacity .7s ease'; p3.style.opacity='1'; }); }, 500);
+  }, 2200);
+  setTimeout(()=>{ p3.style.transition='opacity .6s ease'; p3.style.opacity='0'; setTimeout(()=>{ p3.style.display='none'; p4.style.display='block'; p4.style.opacity='0'; requestAnimationFrame(()=>{ p4.style.transition='opacity .7s ease'; p4.style.opacity='1'; }); }, 600); }, 4200);
+}
+heroSequence();
+$('#heroTitle').addEventListener('click', ()=>{ [p1,p2,p3,p4].forEach(el=>el.removeAttribute('style')); p2.style.opacity='0'; p2.style.transform='translateY(6px)'; p3.style.display='none'; p4.style.display='none'; heroSequence(); });
 
 /* ======================
-   Small helpers
+   Populate initial UI (playlist, gallery, store, cart)
    ====================== */
-function openModal(html){ modal.style.display='grid'; modal.querySelector('.content').innerHTML = html; }
-function closeModal(){ modal.style.display='none'; modal.querySelector('.content').innerHTML = ''; }
-$('#modalClose').addEventListener('click', closeModal);
-document.addEventListener('keydown', e=>{ if(e.key==='Escape') closeModal(); });
-
-/* ======================
-   Build initial UI
-   ====================== */
-function initUI(){
+function populateInitial(){
   populatePlaylist();
   setSong(0);
-  // populate store, gallery already handled above
-  // populate store and gallery now (redundant-safe)
-  // store already appended earlier in code path
-  // render store (in case not already)
-  // (gallery and store are filled by earlier blocks)
+  // gallery & store already filled earlier (safety)
+  // render cart
   renderCart();
 }
 
-/* ======================
-   Utility: populatePlaylist (re-usable)
-   ====================== */
-function populatePlaylist(){
-  playlistSelect.innerHTML = '';
-  DATA.songs.forEach((s, idx)=>{ const o = document.createElement('option'); o.value=idx; o.textContent = s.title; playlistSelect.appendChild(o); });
-}
-
-/* ======================
-   Modal accessibility & cleanup
-   ====================== */
-modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
-
-/* ======================
-   Fill store & gallery (safe guard if not done)
-   ====================== */
-(function fillCollections(){
-  if(!$('#galleryGrid').children.length){
-    DATA.gallery.forEach(u=>{ const img=document.createElement('img'); img.src=u; img.addEventListener('click', ()=> openModal(`<img src="${u}" style="max-width:100%;border-radius:12px">`)); galleryGrid.appendChild(img); });
-  }
-  if(!$('#storeGrid').children.length){
-    DATA.store.forEach(it=>{ const w=document.createElement('div'); w.className='store-item'; w.innerHTML=`<img src="${it.img}" alt="${it.title}"><div style="font-weight:700;margin-top:8px">${it.title}</div><div class="muted" style="margin-top:6px">${fmtCurrency(it.price)}</div><div style="margin-top:8px"><button class="btn addBtn" data-id="${it.id}">Add to cart</button></div>`; storeGrid.appendChild(w); });
-  }
-})();
-
-/* ======================
-   Small: when page hidden pause audio
-   ====================== */
+/* pause audio when hidden */
 document.addEventListener('visibilitychange', ()=>{ if(document.hidden) audio.pause(); });
 
-/* End of script */
-  </script>
+/* modal helper */
+function openModal(html){ modal.style.display='grid'; modal.querySelector('.content').innerHTML = html; }
+function closeModal(){ modal.style.display='none'; modal.querySelector('.content').innerHTML = ''; }
+$('#modalClose').addEventListener('click', closeModal);
+modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+
+/* small helper for links (enter site) */
+$('#toAbout').addEventListener('click', (e)=>{ e.preventDefault(); document.querySelector('#about').scrollIntoView({behavior:'smooth'}); });
+
+</script>
 </body>
 </html>
