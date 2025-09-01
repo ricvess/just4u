@@ -1,189 +1,185 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SAEY:Ly — JUST 36:9 U</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SAEY:Ly — JUST 36:9 U (Official Microsite)</title>
+
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      /* default (Dark Neon) */
-      --bg: #0b0c10;
-      --fg: #f2f2f2;
-      --muted: #b7b7b7;
-      --accent: #ffd86b;
-      --accent-2: #6df1ff;
-      --card: #12141a;
-      --shadow: rgba(0,0,0,.35);
-      --ring: rgba(255,216,107,.35);
-      --grain: rgba(255,255,255,0.03);
-    }
+/* =========================
+   Base + Theme variables
+   ========================= */
+:root{
+  --bg: #0b0c10;
+  --fg: #f2f2f2;
+  --muted: #b7b7b7;
+  --accent: #ffd86b;
+  --accent2: #6df1ff;
+  --card: #12141a;
+  --shadow: rgba(0,0,0,.35);
+  --ring: rgba(255,216,107,.35);
+  --glass: rgba(255,255,255,0.02);
+  --glass-2: rgba(255,255,255,0.04);
+  --glass-3: rgba(255,255,255,0.06);
+  --ease: cubic-bezier(.2,.9,.3,1);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--fg);
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-y: auto;
+  transition:background .45s var(--ease), color .45s var(--ease);
+}
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--fg);
-      background: var(--bg);
-      overflow-x: hidden;
-    }
+/* Background + grain (kept from original look) */
+.bg{
+  position:fixed;inset:0;z-index:-10;
+  background: radial-gradient(1200px 800px at 10% 10%, #1a2a6c 0%, transparent 60%),
+              radial-gradient(1000px 600px at 90% 30%, #fdbb2d55 0%, transparent 60%),
+              radial-gradient(900px 700px at 40% 90%, #22c1c355 0%, transparent 60%),
+              var(--bg);
+  filter:saturate(1.05) contrast(1.05);
+  animation:bgShift 18s ease-in-out infinite alternate;
+}
+@keyframes bgShift{ to{ filter:hue-rotate(20deg) saturate(1.2);} }
+.grain{ position:fixed;inset:0;z-index:-9;pointer-events:none;
+  background:
+   repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px),
+   repeating-linear-gradient(90deg, rgba(255,255,255,0.01) 0 1px, transparent 1px 3px);
+  mix-blend-mode:soft-light; opacity:.9;
+}
 
-    /* Animated background gradients per theme will be applied to .bg */
-    .bg {
-      position: fixed; inset: 0; z-index: -2;
-      background: radial-gradient(1200px 800px at 10% 10%, #1a2a6c 0%, transparent 60%),
-                  radial-gradient(1000px 600px at 90% 30%, #fdbb2d55 0%, transparent 60%),
-                  radial-gradient(900px 700px at 40% 90%, #22c1c355 0%, transparent 60%),
-                  var(--bg);
-      filter: saturate(1.05) contrast(1.05);
-      animation: bgShift 18s ease-in-out infinite alternate;
-    }
-    @keyframes bgShift { to { filter: hue-rotate(20deg) saturate(1.2); } }
+/* =========================
+   Hero (original preserved)
+   ========================= */
+header.hero{
+  min-height:92vh;
+  display:grid;
+  place-items:center;
+  text-align:center;
+  padding:48px 20px 24px;
+  position:relative;
+}
+.logo{ font-family:'Cinzel Decorative',serif; letter-spacing:.06em; text-shadow:0 10px 30px var(--shadow); }
+.title-stack{ line-height:1.06; }
+.title-giant{ font-size:clamp(40px,8vw,92px); font-weight:900; margin:0; color:var(--accent); filter:drop-shadow(0 12px 40px var(--shadow)); transition:opacity .5s var(--ease), transform .5s var(--ease); }
+.title-alt{ font-size:clamp(22px,3.4vw,40px); margin:10px 0 0; color:var(--accent2); opacity:.92; transition:opacity .5s var(--ease), transform .5s var(--ease); }
+.subtitle{ margin-top:16px; font-size:clamp(14px,2.2vw,18px); color:var(--muted); }
 
-    /* Soft film grain overlay */
-    .grain { position: fixed; inset: 0; pointer-events:none; z-index:-1;
-      background:
-        repeating-linear-gradient(0deg, var(--grain) 0px, var(--grain) 1px, transparent 2px, transparent 3px),
-        repeating-linear-gradient(90deg, var(--grain) 0px, var(--grain) 1px, transparent 2px, transparent 3px);
-      mix-blend-mode: soft-light;
-      animation: grainMove 2.4s steps(2) infinite;
-    }
-    @keyframes grainMove { from { transform: translate(0,0);} to { transform: translate(3px,-3px);} }
+/* chips */
+.chipbar{ display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap:wrap; margin-top:26px; }
+.chip{ border:1px solid var(--ring); color:var(--fg); background:var(--glass); padding:10px 14px; border-radius:999px; backdrop-filter:blur(4px); cursor:pointer; transition:transform .15s var(--ease), background .2s var(--ease); box-shadow:0 10px 20px -10px var(--shadow); }
+.chip:hover{ transform:translateY(-3px); background:var(--glass-2); }
+.chip.active{ border-color:var(--accent); box-shadow:0 12px 30px -8px var(--shadow); }
 
-    header.hero {
-      min-height: 92vh; display: grid; place-items: center; text-align: center; padding: 48px 20px 24px;
-      position: relative;
-    }
+/* =========================
+   Layout / container / card
+   ========================= */
+.container{ max-width:1100px; margin:0 auto; padding: 20px; display:grid; grid-template-columns: 1fr; gap:24px; }
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:18px;
+  padding:20px;
+  box-shadow:0 20px 60px -30px var(--shadow);
+  backdrop-filter:blur(6px);
+  opacity:0;
+  transform: translateY(18px);
+  transition:opacity .6s var(--ease), transform .6s var(--ease);
+}
+.card.visible{ opacity:1; transform:translateY(0); }
 
-    .logo {
-      font-family: 'Cinzel Decorative', serif;
-      letter-spacing: .06em;
-      text-shadow: 0 10px 30px var(--shadow);
-    }
+/* section titles */
+.section-title{ font-family:'Cinzel Decorative',serif; font-size:clamp(20px,2.6vw,30px); margin-bottom:10px; color:var(--accent); }
 
-    .title-stack { line-height: 1.06; }
-    .title-giant {
-      font-size: clamp(40px, 8vw, 92px);
-      font-weight: 900;
-      margin: 0;
-      color: var(--accent);
-      filter: drop-shadow(0 12px 40px var(--shadow));
-    }
-    .title-alt {
-      font-size: clamp(22px, 3.4vw, 40px);
-      margin: 10px 0 0;
-      color: var(--accent-2);
-      opacity: .92;
-    }
+/* small helpers */
+.row{ display:flex; gap:14px; flex-wrap:wrap; align-items:center; }
+.center{ display:flex; justify-content:center; align-items:center; }
 
-    .subtitle { margin-top: 16px; font-size: clamp(14px, 2.2vw, 18px); color: var(--muted); }
+/* =========================
+   Vinyl player (new, polished)
+   ========================= */
+.vinyl-wrap{ display:flex; gap:18px; align-items:center; flex-wrap:wrap; }
+.vinyl{ width:180px; height:180px; border-radius:50%; border:8px solid rgba(0,0,0,.6); background: radial-gradient(circle,#111 30%, #222 70%); position:relative; display:grid; place-items:center; box-shadow:0 18px 60px -30px var(--shadow); transition: transform .3s var(--ease); }
+.vinyl .label{ width:68px; height:68px; border-radius:50%; display:grid; place-items:center; color:#0b0c10; font-weight:700; font-size:11px; background:linear-gradient(180deg,var(--accent),var(--accent2)); box-shadow: inset 0 -6px 18px rgba(0,0,0,.12); }
+.vinyl.playing{ animation:spin 3.6s linear infinite; }
+@keyframes spin{ to{ transform: rotate(360deg);} }
 
-    .chipbar {
-      display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap: wrap; margin-top: 26px;
-    }
-    .chip {
-      border: 1px solid var(--ring); color: var(--fg); background: rgba(255,255,255,.02);
-      padding: 10px 14px; border-radius: 999px; backdrop-filter: blur(4px);
-      cursor: pointer; transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      box-shadow: 0 10px 20px -10px var(--shadow);
-      user-select: none;
-    }
-    .chip:hover { transform: translateY(-2px); background: rgba(255,255,255,.05); }
-    .chip.active { border-color: var(--accent); box-shadow: 0 12px 30px -8px var(--shadow); }
+/* player controls */
+.player{ display:flex; gap:12px; align-items:center; background:var(--card); border-radius:14px; padding:10px 12px; border:1px solid rgba(255,255,255,.08); }
+.btn{ border:1px solid var(--ring); color:var(--fg); background:transparent; padding:10px 14px; border-radius:12px; cursor:pointer; transition: transform .15s var(--ease); }
+.btn:hover{ transform:translateY(-3px); box-shadow:0 14px 28px -18px var(--shadow); }
 
-    /* Panels */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px; }
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 24px; padding: 28px; box-shadow: 0 20px 60px -30px var(--shadow);
-      backdrop-filter: blur(8px);
-    }
-    section { margin: 26px 0 26px; }
-    h2.section-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(22px, 3vw, 34px); margin: 0 0 14px; }
-    p { line-height: 1.7; color: var(--fg); opacity: .95; }
+/* playlist select */
+.select{ padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,.06); background:transparent; color:var(--fg); }
 
-    /* Typewriter */
-    .typewriter { font-size: clamp(16px, 2.3vw, 22px); font-style: italic; border-right: 2px solid var(--accent); white-space: nowrap; overflow: hidden; padding-right: 4px; }
-    @keyframes caret { 50% { border-color: transparent; }}
+/* =========================
+   Lyrics box
+   ========================= */
+.typewriter{ font-size:clamp(16px,2.2vw,20px); font-style:italic; border-right:2px solid var(--accent); white-space:nowrap; overflow:hidden; padding-right:6px; }
+.lyrics-block{ max-width:720px; margin:auto; padding:14px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.06); }
 
-    /* Floating retro shapes */
-    .floaty { position: absolute; width: 18px; height: 18px; border-radius: 50%; opacity: .6; filter: blur(.4px);
-      background: radial-gradient(circle at 30% 30%, var(--accent), transparent 70%);
-      animation: floaty 8s ease-in-out infinite;
-    }
-    @keyframes floaty { 0% { transform: translateY(0) translateX(0);} 50% { transform: translateY(-30px) translateX(10px);} 100% { transform: translateY(0) translateX(0);} }
+/* =========================
+   Gallery (kept simple & elegant)
+   ========================= */
+.gallery-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; align-items:center; }
 
-    /* Footer */
-    footer { text-align: center; padding: 40px 20px 80px; color: var(--muted); }
+/* =========================
+   Calendar / countdown (improved)
+   ========================= */
+.countdown{ font-weight:700; color:var(--accent); font-size:1.05rem; text-align:center; }
+.calendar-grid{ display:grid; grid-template-columns: repeat(7,1fr); gap:6px; }
+.cal-cell{ padding:8px; border-radius:8px; text-align:center; background:linear-gradient(180deg, rgba(255,255,255,.02), transparent); cursor:pointer; border:1px solid rgba(255,255,255,.03); }
+.cal-cell.active{ background:linear-gradient(180deg,var(--accent), rgba(255,255,255,.02)); color:#111; font-weight:700; box-shadow:0 10px 30px rgba(0,0,0,.2); }
 
-    /* Theme variants using data-theme on body */
-    body[data-theme="dark-neon"] { --bg:#0b0c10; --fg:#f2f2f2; --muted:#b7b7b7; --accent:#ffd86b; --accent-2:#6df1ff; --card:#12141a; --ring:rgba(255,216,107,.35); }
-    body[data-theme="retro-pink"] { --bg:#1b0f17; --fg:#fff3f8; --muted:#ffdeef; --accent:#ffa4d1; --accent-2:#ffd86b; --card:#2a1424; --ring:rgba(255,164,209,.4); }
-    body[data-theme="indie-beige"] { --bg:#1a1816; --fg:#fff8ee; --muted:#e9dccf; --accent:#d7b889; --accent-2:#a3e1d1; --card:#25211d; --ring:rgba(215,184,137,.4); }
-    body[data-theme="teal-orange"] { --bg:#0f1b1a; --fg:#eafffb; --muted:#cdebe4; --accent:#f4a259; --accent-2:#2ec4b6; --card:#112422; --ring:rgba(46,196,182,.35); }
-    body[data-theme="mono-minimal"] { --bg:#0f0f0f; --fg:#f5f5f5; --muted:#cfcfcf; --accent:#f5f5f5; --accent-2:#bdbdbd; --card:#171717; --ring:rgba(255,255,255,.22); }
+/* =========================
+   Store (improved)
+   ========================= */
+.store-grid{ display:grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap:12px; }
+.store-item{ padding:10px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01)); border:1px solid rgba(255,255,255,.06); text-align:center; }
+.store-item img{ width:100%; height:150px; object-fit:cover; border-radius:10px; margin-bottom:8px; }
+.cart-panel{ margin-top:12px; padding:10px; border-radius:10px; background:rgba(0,0,0,.12); }
 
-    /* Background variations per theme */
-    body[data-theme="retro-pink"] .bg { background:
-      radial-gradient(1000px 600px at 15% 15%, #ff7eb399 0%, transparent 60%),
-      radial-gradient(900px 600px at 85% 35%, #ffd86b55 0%, transparent 60%),
-      radial-gradient(900px 700px at 40% 90%, #ffb6c199 0%, transparent 60%), var(--bg);
-    }
-    body[data-theme="indie-beige"] .bg { background:
-      radial-gradient(1100px 700px at 20% 20%, #d7b88988 0%, transparent 60%),
-      radial-gradient(900px 600px at 80% 30%, #a3e1d188 0%, transparent 60%),
-      radial-gradient(900px 700px at 40% 90%, #6c584c66 0%, transparent 60%), var(--bg);
-    }
-    body[data-theme="teal-orange"] .bg { background:
-      radial-gradient(1000px 600px at 15% 15%, #2ec4b6aa 0%, transparent 60%),
-      radial-gradient(900px 600px at 85% 35%, #f4a25988 0%, transparent 60%),
-      radial-gradient(900px 700px at 40% 90%, #3a506baa 0%, transparent 60%), var(--bg);
-    }
-    body[data-theme="mono-minimal"] .bg { background:
-      radial-gradient(1000px 600px at 15% 15%, #ffffff18 0%, transparent 60%),
-      radial-gradient(900px 600px at 85% 35%, #ffffff10 0%, transparent 60%),
-      radial-gradient(900px 700px at 40% 90%, #ffffff0e 0%, transparent 60%), var(--bg);
-    }
+/* =========================
+   Dock (theme, floaties control)
+   ========================= */
+.dock{ position:fixed; right:16px; bottom:16px; display:flex; gap:10px; z-index:20; flex-direction:column; }
+.dock .panel{ background:var(--card); border:1px solid rgba(255,255,255,.08); padding:10px; border-radius:12px; }
 
-    /* Utility */
-    .center { display:flex; align-items:center; justify-content:center; }
-    .row { display:flex; gap: 14px; flex-wrap: wrap; }
-    .muted { color: var(--muted); }
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); margin: 26px 0; }
+/* =========================
+   Footer
+   ========================= */
+footer{ text-align:center; padding:40px 20px 80px; color:var(--muted); font-size:14px; }
 
-    /* CTA button */
-    .btn { border:1px solid var(--ring); color: var(--fg); background: transparent; padding:12px 18px; border-radius:14px; cursor:pointer; transition: .2s; }
-    .btn:hover { transform: translateY(-1px); box-shadow:0 14px 28px -18px var(--shadow); }
+/* responsive */
+@media(max-width:880px){ .vinyl{ width:150px; height:150px } .title-giant{ font-size:44px } }
 
-    /* Mini player */
-    .player { display:flex; align-items:center; gap:12px; background: var(--card); border:1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 10px 14px; }
-    .player .title { font-weight:600; }
-
-    /* Control dock */
-    .dock { position: fixed; right: 16px; bottom: 16px; display:flex; gap:10px; flex-direction: column; z-index: 10; }
-    .dock .panel { background: var(--card); border:1px solid rgba(255,255,255,.14); border-radius:16px; padding: 10px 12px; box-shadow: 0 20px 40px -28px var(--shadow); }
-    .dock label { font-size: 12px; color: var(--muted); display:block; margin-bottom: 6px; }
-    .dock select, .dock input[type="range"] { width: 180px; background: transparent; color: var(--fg); }
-    .dock option { color: #111; }
-
-    /* Responsive tune */
-    @media(max-width:640px){ .chipbar{gap:8px} .chip{padding:9px 12px} .dock select{width:160px} }
+/* small utilities */
+.muted{ color:var(--muted); font-size:13px; }
+.hidden{ display:none !important; }
   </style>
 </head>
 <body data-theme="dark-neon">
+
   <div class="bg"></div>
   <div class="grain"></div>
 
-  <!-- Floating shapes container -->
-  <div id="floaties"></div>
+  <!-- floaties container -->
+  <div id="floaties" aria-hidden="true"></div>
 
-  <header class="hero">
-    <div class="title-stack logo" id="heroTitle">
+  <!-- HERO (unchanged look, kept exactly) -->
+  <header class="hero" aria-label="Hero">
+    <div class="title-stack logo" id="heroTitle" role="button" tabindex="0">
       <h1 class="title-giant" id="phase1">36 ÷ 9</h1>
-      <h2 class="title-alt" id="phase2" style="opacity:0; transform: translateY(6px);">equals <span style="font-variant-numeric: lining-nums;">4</span></h2>
+      <h2 class="title-alt" id="phase2" style="opacity:0; transform: translateY(6px);">equals <span style="font-variant-numeric:lining-nums">4</span></h2>
       <h1 class="title-giant" id="phase3" style="display:none;">JUST 36:9 U</h1>
       <h1 class="title-giant" id="phase4" style="display:none;">JUST FOR U</h1>
       <div class="subtitle">“36 divide 9, and my heart just for you”</div>
@@ -196,53 +192,101 @@
     </div>
   </header>
 
-  <main class="container">
+  <!-- MAIN content -->
+  <main class="container" id="mainContent" aria-live="polite">
+
+    <!-- ABOUT (with vinyl + playlist + spotify embed) -->
     <section id="about" class="card">
       <h2 class="section-title">About this comeback</h2>
-      <p>
-        SAEY:Ly kembali dengan single <strong>“JUST 36:9 U”</strong> — sebuah retro‑indie anthem dengan twist numerik.
-        <br/>
-        <strong>36 ÷ 9 = 4 → FOR</strong>. Diucapkan sebagai “Just for U”.
-        Lagu ini ditulis sebagai pesan yang sederhana namun personal; sebuah kode kecil yang akan terasa spesial ketika kamu mengetahuinya.
-      </p>
+      <p class="muted">SAEY:Ly kembali dengan single <strong>“JUST 36:9 U”</strong> — retro-indie dengan twist angka. <strong>36 ÷ 9 = 4 → FOR</strong>.</p>
       <div class="divider"></div>
-      <div class="row center">
-        <div class="player">
-          <button class="btn" id="playBtn">▶ Play snippet</button>
-          <div>
-            <div class="title">JUST 36:9 U — teaser</div>
-            <div class="muted" style="font-size:12px">(Ganti src audio di kode jika sudah ada)</div>
+
+      <div class="row" style="align-items:center;">
+        <!-- Vinyl visual -->
+        <div class="vinyl-wrap">
+          <div id="vinyl" class="vinyl" role="img" aria-label="vinyl cover">
+            <div id="vinylLabel" class="label">SAEY:Ly</div>
           </div>
-          <audio id="audio" preload="none">
-            <!-- TODO: Ganti dengan file kamu, contoh: <source src="/audio/just-369u-teaser.mp3" type="audio/mpeg"> -->
-          </audio>
+        </div>
+
+        <!-- Player + controls -->
+        <div style="flex:1; min-width:260px;">
+          <div class="player" style="margin-bottom:12px;">
+            <button class="btn" id="playBtn">▶ Play</button>
+            <button class="btn" id="prevBtn">⟨ Prev</button>
+            <button class="btn" id="nextBtn">Next ⟩</button>
+
+            <select id="playlistSelect" class="select" style="margin-left:auto">
+              <!-- Songs array will be injected by JS for maintainability -->
+            </select>
+          </div>
+
+          <div class="muted" style="margin-bottom:10px">Snippet player — klik vinyl atau tombol▶ untuk putar.</div>
+
+          <!-- Local audio element used for vinyl + synced lyrics -->
+          <audio id="audio" preload="metadata"></audio>
+
+          <!-- Spotify embed (kept tidy) -->
+          <div id="spotifyContainer" style="margin-top:18px;">
+            <div class="muted" style="margin-bottom:8px">Or listen on Spotify</div>
+            <iframe style="border-radius:12px" 
+              src="https://open.spotify.com/embed/playlist/2sZYutAwhMODqCaS0mYj4Z?utm_source=generator" 
+              width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Lyrics -->
     <section id="lyrics" class="card">
       <h2 class="section-title">Lyrics preview</h2>
-      <p id="typewriter" class="typewriter" aria-live="polite"></p>
-    </section>
-
-    <section id="gallery" class="card">
-      <h2 class="section-title">Gallery</h2>
-      <p class="muted">Taruh poster/teaser di sini (ganti <code>src</code> gambarnya).</p>
-      <div class="row center" style="justify-content:center;">
-        <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=1200&auto=format&fit=crop" alt="Poster teaser" style="width:100%; max-width:520px; border-radius:18px; box-shadow:0 24px 70px -40px var(--shadow); border:1px solid rgba(255,255,255,.14)"/>
+      <div class="lyrics-block">
+        <div id="lyricsText" class="typewriter" aria-live="polite"></div>
+        <div style="margin-top:12px" class="muted">Tip: pilih lagu di playlist untuk melihat lirik yang sesuai (sync basic).</div>
       </div>
     </section>
+
+    <!-- Gallery -->
+    <section id="gallery" class="card">
+      <h2 class="section-title">Gallery</h2>
+      <p class="muted">Poster & teaser — klik untuk lihat fullscreen.</p>
+      <div class="gallery-grid" id="galleryGrid">
+        <!-- images populated by JS -->
+      </div>
+    </section>
+
+    <!-- Calendar / Countdown -->
+    <section id="events" class="card">
+      <h2 class="section-title">Calendar & Countdown</h2>
+      <div class="muted" style="margin-bottom:10px">Upcoming roadmap — klik a date to set this as countdown target</div>
+      <div class="countdown" id="countdownDisplay">—</div>
+      <div style="height:12px"></div>
+      <div class="calendar-grid" id="calendarGrid" aria-hidden="false"></div>
+    </section>
+
+    <!-- Store -->
+    <section id="store" class="card">
+      <h2 class="section-title">Merch Store</h2>
+      <p class="muted">Limited runs — demo checkout (mock).</p>
+      <div class="store-grid" id="storeGrid"></div>
+
+      <div class="cart-panel" id="cartPanel" aria-live="polite">
+        <strong>Your cart</strong>
+        <div id="cartList" style="margin-top:8px"></div>
+        <div style="margin-top:8px"><strong id="cartTotal">Total: $0</strong></div>
+        <div style="margin-top:10px"><button class="btn" id="checkoutBtn">Checkout (demo)</button></div>
+      </div>
+    </section>
+
   </main>
 
-  <footer>
-    © 2025 SAEY:Ly. All rights reserved.
-  </footer>
+  <footer>© 2025 SAEY:Ly — Made with ♥</footer>
 
-  <!-- Control Dock: Themes & FX -->
-  <div class="dock">
+  <!-- Dock for controls -->
+  <div class="dock" role="region" aria-label="Controls">
     <div class="panel">
-      <label for="themeSelect">Theme</label>
-      <select id="themeSelect" aria-label="Select theme">
+      <label for="themeSelect" style="font-size:12px;color:var(--muted);">Theme</label>
+      <select id="themeSelect" style="width:180px;background:transparent;color:var(--fg);">
         <option value="dark-neon">Dark Neon</option>
         <option value="retro-pink">Retro Pink</option>
         <option value="indie-beige">Indie Beige</option>
@@ -251,130 +295,408 @@
       </select>
     </div>
     <div class="panel">
-      <label for="shapeCount">Floating shapes</label>
+      <label for="shapeCount" style="font-size:12px;color:var(--muted);">Floating shapes</label>
       <input id="shapeCount" type="range" min="0" max="30" value="12" />
     </div>
   </div>
 
+  <!-- Modal template (used for image fullscreen & checkout) -->
+  <div id="modal" class="hidden" style="position:fixed;inset:0;display:grid;place-items:center;background:rgba(0,0,0,0.6);z-index:1000;">
+    <div id="modalContent" style="background:var(--card);padding:18px;border-radius:14px;max-width:92%;max-height:92%;overflow:auto;"></div>
+    <button id="modalClose" style="position:absolute;top:20px;right:20px;padding:8px 12px;border-radius:10px;border:1px solid var(--ring);background:transparent;color:var(--fg);">Close</button>
+  </div>
+
   <script>
-    // --- Hero staged animation (36 ÷ 9 -> 4 -> JUST 36:9 U -> JUST FOR U) ---
-    const p1 = document.getElementById('phase1');
-    const p2 = document.getElementById('phase2');
-    const p3 = document.getElementById('phase3');
-    const p4 = document.getElementById('phase4');
+/* =========================
+   Data (playlist, gallery, store, events)
+   Keep everything centralized for easy edits
+   ========================= */
+const DATA = {
+  songs: [
+    { id: 't1', title: 'Just 36:9 U — Teaser', src: '', cover: 'https://images.unsplash.com/photo-1534790566855-4cb788d389ec?q=80&w=800&auto=format&fit=crop', lyrics: '36 divide 9, and my heart just for you\nWe whisper soft where night is new\n...' },
+    { id: 't2', title: 'Retro Night', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3', cover: 'https://images.unsplash.com/photo-1495185100296-6f4f4fb35f3e?q=80&w=800&auto=format&fit=crop', lyrics: 'Retro lights and velvet skies\nDancing slow with open eyes\n...' },
+    { id: 't3', title: 'Morning For U', src: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3', cover: 'https://images.unsplash.com/photo-1507878866276-a947ef722fee?q=80&w=800&auto=format&fit=crop', lyrics: 'I write these days for you alone\nSimple chords and steady tone\n...' }
+  ],
+  gallery: [
+    'https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1200&auto=format&fit=crop',
+    'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1200&auto=format&fit=crop'
+  ],
+  store: [
+    { id:'h', title:'JUST 36:9 U Tee', price: 149000, img:'https://images.unsplash.com/photo-1585386959984-a4155225f0f5?q=80&w=800&auto=format&fit=crop' },
+    { id:'v', title:'Limited Vinyl', price: 299000, img:'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?q=80&w=800&auto=format&fit=crop' },
+    { id:'t', title:'Canvas Tote', price: 89000, img:'https://images.unsplash.com/photo-1520975912826-0e7c11c0b6db?q=80&w=800&auto=format&fit=crop' }
+  ],
+  events: [
+    { date: '2025-09-20', title: 'Teaser Drop' },
+    { date: '2025-10-05', title: 'Single Release' },
+    { date: '2025-11-01', title: 'Merch Drop' }
+  ]
+};
 
-    function heroSequence(){
-      // phase 1 visible initially
-      setTimeout(()=>{
-        p2.style.transition = 'all .8s ease';
-        p2.style.opacity = '1';
-        p2.style.transform = 'translateY(0)';
-      }, 900);
+/* =========================
+   Helper functions
+   ========================= */
+const $ = sel=>document.querySelector(sel);
+const $$ = sel=>Array.from(document.querySelectorAll(sel));
+function fmtCurrency(idr){ return 'Rp ' + idr.toString().replace(/\B(?=(\d{3})+(?!\d))/g, "."); }
 
-      setTimeout(()=>{
-        // swap to JUST 36:9 U
-        p1.style.transition='opacity .5s ease';
-        p2.style.transition='opacity .5s ease, transform .5s ease';
-        p1.style.opacity='0';
-        p2.style.opacity='0';
-        setTimeout(()=>{
-          p1.style.display='none';
-          p2.style.display='none';
-          p3.style.display='block';
-          p3.style.opacity='0';
-          requestAnimationFrame(()=>{ p3.style.transition='opacity .7s ease'; p3.style.opacity='1'; });
-        }, 500);
-      }, 2200);
+/* =========================
+   Initialize UI: playlist, gallery, store, calendar
+   ========================= */
+const playlistSelect = $('#playlistSelect');
+const audio = $('#audio');
+const vinyl = $('#vinyl');
+const vinylLabel = $('#vinylLabel');
+const lyricsText = $('#lyricsText');
+const galleryGrid = $('#galleryGrid');
+const storeGrid = $('#storeGrid');
+const cartList = $('#cartList');
+const cartTotal = $('#cartTotal');
+const countdownDisplay = $('#countdownDisplay');
+const calendarGrid = $('#calendarGrid');
 
-      setTimeout(()=>{
-        // final morph to JUST FOR U
-        p3.style.transition='opacity .6s ease';
-        p3.style.opacity='0';
-        setTimeout(()=>{
-          p3.style.display='none';
-          p4.style.display='block';
-          p4.style.opacity='0';
-          requestAnimationFrame(()=>{ p4.style.transition='opacity .7s ease'; p4.style.opacity='1'; });
-        }, 600);
-      }, 4200);
+let cart = [];
+let currentSongIndex = 0;
+let countdownTarget = null;
+
+// populate playlist select
+DATA.songs.forEach((s, idx)=>{
+  const opt = document.createElement('option');
+  opt.value = idx;
+  opt.textContent = s.title;
+  opt.dataset.src = s.src;
+  opt.dataset.cover = s.cover;
+  playlistSelect.appendChild(opt);
+});
+// set default: first song (may be teaser with no src)
+function setSong(index){
+  currentSongIndex = index;
+  const s = DATA.songs[index];
+  // set vinyl label cover
+  vinyl.style.backgroundImage = `radial-gradient(circle at 28% 28%, rgba(255,255,255,0.02), transparent 30%), url('${s.cover}')`;
+  vinyl.style.backgroundSize = 'cover';
+  vinylLabel.textContent = s.title.split(' — ')[0] || 'SAEY:Ly';
+
+  // set audio src if present
+  audio.innerHTML = '';
+  if(s.src){
+    const srcEl = document.createElement('source');
+    srcEl.src = s.src;
+    srcEl.type = 'audio/mpeg';
+    audio.appendChild(srcEl);
+    audio.load();
+  }
+  // update lyrics
+  startTypewriter(s.lyrics || 'Lyrics not available for this track.');
+  // update select
+  playlistSelect.value = index;
+}
+setSong(0);
+
+// attach select change
+playlistSelect.addEventListener('change', e=>{
+  setSong(parseInt(e.target.value,10));
+  playAudioIfAvailable();
+});
+
+// play/pause controls
+function playAudioIfAvailable(){
+  const sources = audio.querySelectorAll('source');
+  if(sources.length === 0){ alert('No audio file for this track.'); return; }
+  audio.play();
+}
+$('#playBtn').addEventListener('click', ()=>{
+  const srcs = audio.querySelectorAll('source');
+  if(srcs.length===0){ alert('No local snippet. Spotify is available below.'); return; }
+  if(audio.paused) audio.play(); else audio.pause();
+});
+$('#prevBtn').addEventListener('click', ()=> {
+  currentSongIndex = (currentSongIndex - 1 + DATA.songs.length) % DATA.songs.length;
+  setSong(currentSongIndex);
+  playAudioIfAvailable();
+});
+$('#nextBtn').addEventListener('click', ()=>{
+  currentSongIndex = (currentSongIndex + 1) % DATA.songs.length;
+  setSong(currentSongIndex);
+  playAudioIfAvailable();
+});
+
+// vinyl animation tied to audio
+audio.addEventListener('play', ()=> vinyl.classList.add('playing'));
+audio.addEventListener('pause', ()=> vinyl.classList.remove('playing'));
+vinyl.addEventListener('click', ()=> {
+  // toggle play (same as play button)
+  const srcs = audio.querySelectorAll('source');
+  if(srcs.length===0){ alert('No audio file for this track.'); return; }
+  if(audio.paused) audio.play(); else audio.pause();
+});
+
+/* =========================
+   Typewriter (lyrics) - improved
+   ========================= */
+let typeTimer = null;
+function startTypewriter(text){
+  clearTimeout(typeTimer);
+  let i=0;
+  lyricsText.textContent = '';
+  function step(){
+    if(i <= text.length){
+      // show up to current char
+      lyricsText.textContent = text.slice(0,i++);
+      const delay = 16 + Math.random()*40;
+      typeTimer = setTimeout(step, delay);
+    } else {
+      // pause then reset (loop)
+      typeTimer = setTimeout(()=>{ i=0; lyricsText.textContent=''; typeTimer = setTimeout(step, 500); }, 1500);
     }
-    heroSequence();
+  }
+  step();
+}
 
-    // Re-run hero animation when clicking the title
-    document.getElementById('heroTitle').addEventListener('click', ()=>{
-      [p1,p2,p3,p4].forEach(el=>{ el.removeAttribute('style'); });
-      p2.style.opacity='0'; p2.style.transform='translateY(6px)'; p3.style.display='none'; p4.style.display='none';
-      heroSequence();
-    });
+/* =========================
+   Gallery populate + modal
+   ========================= */
+DATA.gallery.forEach((url,i)=>{
+  const img = document.createElement('img');
+  img.src = url;
+  img.alt = `Gallery ${i+1}`;
+  img.style.cursor = 'pointer';
+  img.addEventListener('click', ()=> openModal(`<img src="${url}" style="max-width:100%;height:auto;border-radius:12px">`));
+  galleryGrid.appendChild(img);
+});
+function openModal(html){
+  const modal = $('#modal');
+  $('#modalContent').innerHTML = html;
+  modal.classList.remove('hidden');
+  modal.style.display = 'grid';
+}
+$('#modalClose').addEventListener('click', closeModal);
+function closeModal(){ $('#modal').classList.add('hidden'); $('#modal').style.display='none'; }
 
-    // Smooth scroll from Enter
-    document.getElementById('enterBtn').addEventListener('click',()=>{
-      document.querySelector('#about').scrollIntoView({behavior:'smooth'});
-    });
-
-    // --- Typewriter effect ---
-    const LYRICS = '36 divide 9, and my heart just for you';
-    const tw = document.getElementById('typewriter');
-    let idx = 0; tw.style.animation = 'caret 1s step-end infinite';
-    function typeLoop(){
-      if(idx <= LYRICS.length){
-        tw.textContent = LYRICS.slice(0, idx++);
-        const delay = 38 + Math.random()*90; // human-ish
-        setTimeout(typeLoop, delay);
-      } else {
-        setTimeout(()=>{ idx = 0; tw.textContent=''; typeLoop(); }, 1800);
-      }
+/* =========================
+   Calendar: render current month with events
+   click date -> set countdown target
+   ========================= */
+function renderCalendar(year,month){
+  calendarGrid.innerHTML = '';
+  const days = ['Su','Mo','Tu','We','Th','Fr','Sa'];
+  days.forEach(d=>{
+    const th = document.createElement('div'); th.className='cal-cell muted'; th.textContent=d; calendarGrid.appendChild(th);
+  });
+  const first = new Date(year,month,1);
+  const startDay = first.getDay();
+  const total = new Date(year,month+1,0).getDate();
+  for(let i=0;i<startDay;i++){ const empty = document.createElement('div'); empty.className='cal-cell'; calendarGrid.appendChild(empty); }
+  for(let d=1; d<=total; d++){
+    const el = document.createElement('div');
+    el.className='cal-cell';
+    el.textContent = d;
+    const y = year, m = (month+1).toString().padStart(2,'0'), day = d.toString().padStart(2,'0');
+    const iso = `${y}-${m}-${day}`;
+    // mark event if exists
+    const ev = DATA.events.find(e=>e.date===iso);
+    if(ev){
+      const badge = document.createElement('div'); badge.textContent = ev.title; badge.style.fontSize='12px'; badge.style.marginTop='6px'; badge.style.background='linear-gradient(90deg,var(--accent),var(--accent2))'; badge.style.padding='4px 6px'; badge.style.borderRadius='8px'; badge.style.color='#111';
+      el.appendChild(badge);
     }
-    typeLoop();
-
-    // --- Theme switcher ---
-    const themeSelect = document.getElementById('themeSelect');
-    themeSelect.addEventListener('change', (e)=>{
-      document.body.setAttribute('data-theme', e.target.value);
+    el.addEventListener('click', ()=> {
+      // set countdown
+      countdownTarget = new Date(y, month, d, 0, 0, 0);
+      updateCountdown(); // immediate update
+      // highlight active
+      $$('.cal-cell').forEach(c=>c.classList.remove('active'));
+      el.classList.add('active');
     });
+    calendarGrid.appendChild(el);
+  }
+}
+const now = new Date();
+renderCalendar(now.getFullYear(), now.getMonth());
 
-    // --- Floating shapes ---
-    const floaties = document.getElementById('floaties');
-    const shapeRange = document.getElementById('shapeCount');
+/* =========================
+   Countdown logic
+   ========================= */
+let countdownInterval = null;
+function updateCountdown(){
+  if(!countdownTarget){ countdownDisplay.textContent = 'Select an event date on calendar (or set a release date).'; return; }
+  if(countdownInterval) clearInterval(countdownInterval);
+  function tick(){
+    const now = new Date().getTime();
+    const dist = countdownTarget.getTime() - now;
+    if(dist <= 0){ countdownDisplay.textContent = '✨ The event is here! ✨'; clearInterval(countdownInterval); return; }
+    const d = Math.floor(dist/(1000*60*60*24));
+    const h = Math.floor((dist%(1000*60*60*24))/(1000*60*60));
+    const m = Math.floor((dist%(1000*60*60))/(1000*60));
+    const s = Math.floor((dist%(1000*60))/1000);
+    countdownDisplay.textContent = `${d}d ${h}h ${m}m ${s}s until event`;
+  }
+  tick();
+  countdownInterval = setInterval(tick,1000);
+}
+// default countdown to first event (if exists)
+if(DATA.events.length) { const e0 = new Date(DATA.events[0].date); countdownTarget = e0; updateCountdown(); }
 
-    function rand(min, max){ return Math.random()*(max-min)+min; }
+/* =========================
+   Store logic (cart + checkout mock)
+   ========================= */
+DATA.store.forEach(item=>{
+  const wrap = document.createElement('div');
+  wrap.className = 'store-item';
+  wrap.innerHTML = `
+    <img src="${item.img}" alt="${item.title}" />
+    <div style="font-weight:700;margin-top:6px">${item.title}</div>
+    <div class="muted" style="margin-top:6px">${fmtCurrency(item.price)}</div>
+    <div style="margin-top:8px"><button class="btn" data-id="${item.id}">Add to cart</button></div>
+  `;
+  storeGrid.appendChild(wrap);
+});
+// add event listeners
+storeGrid.addEventListener('click', (e)=>{
+  const btn = e.target.closest('button');
+  if(!btn) return;
+  const id = btn.dataset.id;
+  const item = DATA.store.find(i=>i.id===id);
+  if(item){
+    cart.push(item);
+    renderCart();
+    // small animation: open modal confirmation
+    openModal(`<div style="text-align:center"><h3>Added to cart</h3><p>${item.title}</p><p style="margin-top:8px">${fmtCurrency(item.price)}</p></div>`);
+    setTimeout(closeModal,900);
+  }
+});
+function renderCart(){
+  cartList.innerHTML = '';
+  let sum = 0;
+  cart.forEach((it, idx)=>{
+    const row = document.createElement('div');
+    row.style.display='flex';
+    row.style.justifyContent='space-between';
+    row.style.padding='6px 0';
+    row.innerHTML = `<div>${it.title}</div><div>${fmtCurrency(it.price)} <button data-idx="${idx}" style="margin-left:8px;border:none;background:transparent;color:var(--accent);cursor:pointer">Remove</button></div>`;
+    cartList.appendChild(row);
+    sum += it.price;
+  });
+  cartTotal.textContent = `Total: ${fmtCurrency(sum)}`;
+}
+cartList.addEventListener('click', (e)=> {
+  const rem = e.target.closest('button');
+  if(!rem) return;
+  const idx = parseInt(rem.dataset.idx,10);
+  cart.splice(idx,1);
+  renderCart();
+});
+$('#checkoutBtn').addEventListener('click', ()=>{
+  if(cart.length===0){ alert('Cart kosong — tambahkan item dulu.'); return; }
+  // mock checkout form inside modal
+  const itemsHtml = cart.map(i=>`<li>${i.title} — ${fmtCurrency(i.price)}</li>`).join('');
+  openModal(`<div><h3>Mock Checkout</h3><ul>${itemsHtml}</ul><p style="margin-top:8px">${fmtCurrency(cart.reduce((s,it)=>s+it.price,0))}</p>
+    <div style="margin-top:12px"><button id="confirmOrder" class="btn">Place Order (Demo)</button></div></div>`);
+  // attach confirm handler
+  setTimeout(()=>{ $('#confirmOrder').addEventListener('click', ()=>{
+    openModal('<div style="text-align:center"><h3>Order placed!</h3><p>Thanks for supporting SAEY:Ly — this is a demo checkout.</p></div>');
+    cart = []; renderCart();
+    setTimeout(closeModal,1200);
+  })},50);
+});
 
-    function drawFloaties(count){
-      floaties.innerHTML='';
-      for(let i=0;i<count;i++){
-        const d = document.createElement('div');
-        d.className = 'floaty';
-        const size = rand(10, 36);
-        d.style.width = size+'px'; d.style.height = size+'px';
-        d.style.left = rand(0, 100)+'vw';
-        d.style.top = rand(10, 85)+'vh';
-        d.style.opacity = rand(.25, .65);
-        d.style.animationDuration = rand(7, 15)+'s';
-        d.style.animationDelay = (-rand(0, 10))+'s';
-        // some will be squares/triangles-ish via clip-path
-        if(Math.random()>0.66){
-          d.style.borderRadius = Math.random()>0.5 ? '8px' : '0';
-          d.style.background = 'linear-gradient(135deg, var(--accent), transparent)';
-          if(Math.random()>0.5) d.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
-        }
-        floaties.appendChild(d);
-      }
+/* =========================
+   Theme switching (visual & smooth)
+   ========================= */
+$('#themeSelect').addEventListener('change', (e)=>{
+  document.body.setAttribute('data-theme', e.target.value);
+  // tweak .bg colors visually for some themes (kept simple)
+  if(e.target.value === 'retro-pink'){
+    document.querySelector('.bg').style.background = 'radial-gradient(1000px 600px at 15% 15%, #ff7eb399 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #ffd86b55 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #ffb6c199 0%, transparent 60%), #1b0f17';
+  } else if(e.target.value === 'indie-beige'){
+    document.querySelector('.bg').style.background = 'radial-gradient(1100px 700px at 20% 20%, #d7b88988 0%, transparent 60%), radial-gradient(900px 600px at 80% 30%, #a3e1d188 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #6c584c66 0%, transparent 60%), #1a1816';
+  } else if(e.target.value === 'teal-orange'){
+    document.querySelector('.bg').style.background = 'radial-gradient(1000px 600px at 15% 15%, #2ec4b6aa 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #f4a25988 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #3a506baa 0%, transparent 60%), #0f1b1a';
+  } else if(e.target.value === 'mono-minimal'){
+    document.querySelector('.bg').style.background = 'radial-gradient(1000px 600px at 15% 15%, #ffffff18 0%, transparent 60%), radial-gradient(900px 600px at 85% 35%, #ffffff10 0%, transparent 60%), radial-gradient(900px 700px at 40% 90%, #ffffff0e 0%, transparent 60%), #0f0f0f';
+  } else {
+    document.querySelector('.bg').style.background = ''; // original
+  }
+});
+
+/* =========================
+   Floating shapes control
+   ========================= */
+function rand(min,max){return Math.random()*(max-min)+min;}
+function drawFloaties(count){
+  const wrap = $('#floaties'); wrap.innerHTML='';
+  for(let i=0;i<count;i++){
+    const d = document.createElement('div');
+    d.className = 'floaty';
+    const size = rand(8,34);
+    d.style.width = size+'px';
+    d.style.height = size+'px';
+    d.style.position = 'absolute';
+    d.style.left = rand(0,100)+'vw';
+    d.style.top = rand(5,85)+'vh';
+    d.style.opacity = rand(.25,.7);
+    d.style.borderRadius = Math.random()>0.66 ? '6px' : '50%';
+    d.style.background = `linear-gradient(135deg, ${randColor()}, transparent)`;
+    d.animate([{transform:'translateY(0)'},{transform:`translateY(${rand(20,120)}px)`}],{duration:6000+Math.random()*9000,iterations:Infinity,direction:'alternate'});
+    wrap.appendChild(d);
+  }
+  function randColor(){
+    const arr = ['#ffd86b','#6df1ff','#ff9ad5','#a3e1d1'];
+    return arr[Math.floor(Math.random()*arr.length)];
+  }
+}
+drawFloaties(parseInt($('#shapeCount').value,10));
+$('#shapeCount').addEventListener('input', e => drawFloaties(parseInt(e.target.value,10)) );
+
+/* =========================
+   Scroll reveal for cards
+   ========================= */
+function revealOnScroll(){
+  document.querySelectorAll('.card').forEach(card=>{
+    const rect = card.getBoundingClientRect();
+    if(rect.top < window.innerHeight - 80){
+      card.classList.add('visible');
     }
-    drawFloaties(parseInt(shapeRange.value,10));
-    shapeRange.addEventListener('input', (e)=> drawFloaties(parseInt(e.target.value,10)) );
+  });
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', ()=>{ revealOnScroll(); populateInitialUI(); });
 
-    // --- Mini audio player ---
-    const audio = document.getElementById('audio');
-    const playBtn = document.getElementById('playBtn');
-    let playing = false;
-    playBtn.addEventListener('click', ()=>{
-      if(!audio.querySelector('source')){
-        alert('Belum ada file audio. Tambahkan <source src="/path/to/your.mp3" type="audio/mpeg"> di elemen <audio> ya.');
-        return;
-      }
-      if(!playing){ audio.play(); playBtn.textContent='⏸ Pause'; } else { audio.pause(); playBtn.textContent='▶ Play snippet'; }
-      playing = !playing;
-    });
-  </script>
+/* =========================
+   Populate initial UI after load
+   ========================= */
+function populateInitialUI(){
+  // set playlistSelect options titles already set — but ensure current song reflected
+  playlistSelect.innerHTML = '';
+  DATA.songs.forEach((s, idx)=>{
+    const o = document.createElement('option'); o.value = idx; o.textContent = s.title;
+    playlistSelect.appendChild(o);
+  });
+  setSong(0);
+
+  // populate gallery already done above
+  // populate store done above
+  // initial cart render
+  renderCart();
+}
+
+/* =========================
+   Accessibility & extra UX
+   ========================= */
+document.getElementById('enterBtn').addEventListener('click', ()=>{ document.querySelector('#about').scrollIntoView({behavior:'smooth'}); });
+
+/* Close modal on background click */
+$('#modal').addEventListener('click', (ev) => { if(ev.target === $('#modal')) closeModal(); });
+
+/* keyboard escape modal */
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+
+/* Ensure audio stops on page hide */
+document.addEventListener('visibilitychange', ()=> { if(document.hidden) audio.pause(); });
+
+/* tiny: when clicking a gallery image, keyboard focus returns gracefully */
+$('#modal').addEventListener('animationend', ()=> { /* placeholder */ });
+
+</script>
 </body>
 </html>
