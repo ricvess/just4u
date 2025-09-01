@@ -1,533 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAEY:Ly Portal</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
-        :root {
-            --bg-dark: #1e1e2f;
-            --bg-light: #f4f4f9;
-            --text-dark: #fff;
-            --text-light: #333;
-            --card-dark: rgba(255,255,255,0.05);
-            --card-light: rgba(0,0,0,0.05);
-            --accent-color: #ff6584;
-        }
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-dark);
-            transition: background 0.5s, color 0.5s;
-        }
-        body.light-theme {
-            background: var(--bg-light);
-            color: var(--text-light);
-        }
-        header {
-            text-align: center;
-            padding: 2rem;
-            font-size: 2rem;
-            font-weight: bold;
-            position: relative;
-        }
-        section { padding: 3rem; }
-        h2 { font-weight: 600; border-bottom: 2px solid var(--accent-color); padding-bottom: 0.5rem; display: inline-block; }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAEY:Ly Portal</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e1e2f, #282846);
+      color: #fff;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 2rem;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+    section { padding: 3rem; }
 
-        /* Theme Switcher */
-        #theme-toggle {
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
-            background: none;
-            border: none;
-            color: var(--text-dark);
-            font-size: 1.5rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        body.light-theme #theme-toggle { color: var(--text-light); }
-        #theme-toggle:hover { transform: scale(1.1); }
+    /* Vinyl */
+    .vinyl-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .vinyl {
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 10px solid #111;
+      background: radial-gradient(circle, #333 40%, #000 100%);
+      position: relative;
+      animation: spin 6s linear infinite;
+      animation-play-state: paused;
+    }
+    .vinyl.playing { animation-play-state: running; }
+    .vinyl img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
 
-        /* Vinyl & Player */
-        .vinyl-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-        .vinyl {
-            width: 220px;
-            height: 220px;
-            border-radius: 50%;
-            border: 10px solid #111;
-            background: radial-gradient(circle, #333 40%, #000 100%);
-            position: relative;
-            animation: spin 6s linear infinite;
-            animation-play-state: paused;
-        }
-        .vinyl.playing { animation-play-state: running; }
-        .vinyl img {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        @keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+    /* Countdown */
+    .countdown {
+      font-size: 1.2rem;
+      text-align: center;
+      margin-top: 1rem;
+    }
 
-        /* Countdown */
-        .countdown {
-            font-size: 1.5rem;
-            text-align: center;
-            margin-top: 1rem;
-            background: var(--card-dark);
-            padding: 2rem;
-            border-radius: 12px;
-        }
-        body.light-theme .countdown { background: var(--card-light); }
-        .countdown span { font-size: 3rem; font-weight: 700; color: var(--accent-color); }
+    /* Lyrics */
+    .lyrics {
+      max-width: 500px;
+      margin: auto;
+      padding: 1rem;
+      border: 1px solid #555;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+    }
+    .lyrics h3 { margin-bottom: 1rem; }
 
-        /* Lyrics */
-        .lyrics {
-            max-width: 600px;
-            margin: auto;
-            padding: 1.5rem;
-            border-radius: 10px;
-            background: var(--card-dark);
-            text-align: center;
-        }
-        body.light-theme .lyrics { background: var(--card-light); }
-        .lyrics h3 { margin-bottom: 1rem; color: var(--accent-color); }
-        .lyrics p { white-space: pre-wrap; }
-
-        /* Store */
-        .shop {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-        .item {
-            background: var(--card-dark);
-            padding: 1.5rem;
-            border-radius: 15px;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-        body.light-theme .item { background: var(--card-light); }
-        .item:hover { transform: translateY(-10px); }
-        .item img { width: 100%; border-radius: 12px; }
-        .btn {
-            background: var(--accent-color);
-            color: #fff;
-            border: none;
-            padding: 0.7rem 1.5rem;
-            border-radius: 25px;
-            cursor: pointer;
-            margin-top: 1rem;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-        .btn:hover { background: #ff4a6e; }
-        
-        /* Chatbox */
-        .chatbox {
-            max-width: 500px;
-            margin: auto;
-            background: var(--card-dark);
-            border-radius: 15px;
-            padding: 1.5rem;
-        }
-        body.light-theme .chatbox { background: var(--card-light); }
-        #chat-messages {
-            height: 200px;
-            overflow-y: scroll;
-            margin-bottom: 1rem;
-            padding: 0.5rem;
-            border: 1px solid #555;
-            border-radius: 8px;
-        }
-        .chat-input { display: flex; gap: 0.5rem; }
-        .chat-input input { flex-grow: 1; padding: 0.5rem; border-radius: 5px; border: none; }
-        .chat-input button { background: var(--accent-color); color: #fff; border: none; padding: 0.5rem; border-radius: 5px; cursor: pointer; }
-
-        /* Gallery */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-        .gallery-item {
-            background: var(--card-dark);
-            border-radius: 15px;
-            overflow: hidden;
-        }
-        body.light-theme .gallery-item { background: var(--card-light); }
-        .gallery-item img, .gallery-item video {
-            width: 100%;
-            display: block;
-        }
-
-        /* Quiz */
-        .quiz-container {
-            max-width: 600px;
-            margin: auto;
-            background: var(--card-dark);
-            padding: 2rem;
-            border-radius: 15px;
-        }
-        body.light-theme .quiz-container { background: var(--card-light); }
-        .quiz-container button {
-            display: block;
-            width: 100%;
-            margin-top: 0.5rem;
-        }
-        #quiz-result {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-weight: 700;
-        }
-    </style>
+    /* Shop */
+    .shop {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap: 1.5rem;
+    }
+    .item {
+      background: rgba(255,255,255,0.1);
+      padding: 1rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .item img {
+      width: 100%;
+      border-radius: 12px;
+    }
+    .btn {
+      background: #ff6584;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+    .cart {
+      margin-top: 2rem;
+      background: rgba(255,255,255,0.08);
+      padding: 1rem;
+      border-radius: 12px;
+    }
+  </style>
 </head>
 <body>
+  <header>✨ SAEY:Ly Music Portal ✨</header>
 
-    <button id="theme-toggle"><i class="fas fa-sun"></i></button>
+  <section id="vinyl-section">
+    <h2>🎶 Vinyl Player</h2>
+    <div class="vinyl-container">
+      <div class="vinyl" id="vinyl">
+        <img id="cover" src="https://i.imgur.com/6rK2Kqb.jpeg" alt="cover">
+      </div>
+      <audio id="player" controls>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+      </audio>
+      <select id="songList">
+        <option value="1" data-cover="https://i.imgur.com/6rK2Kqb.jpeg" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Song 1</option>
+        <option value="2" data-cover="https://i.imgur.com/fVQpLqT.jpeg" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Song 2</option>
+      </select>
+    </div>
+  </section>
 
-    <header>✨ SAEY:Ly Music Portal ✨</header>
+  <section id="countdown-section">
+    <h2>📅 Event Countdown</h2>
+    <div class="countdown" id="countdown">Loading...</div>
+  </section>
 
-    <section id="music-section">
-        <h2>🎶 Music Player</h2>
-        <div class="vinyl-container">
-            <div class="vinyl" id="vinyl">
-                <img id="cover" src="https://i.imgur.com/6rK2Kqb.jpeg" alt="Album Cover">
-            </div>
-            <audio id="player" controls>
-                <source src="" type="audio/mpeg">
-            </audio>
-            <select id="songList">
-                <option value="0" selected disabled>Pilih Lagu</option>
-                <option value="1" data-cover="https://i.imgur.com/6rK2Kqb.jpeg" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">SAEY:Ly - Echoes of Time</option>
-                <option value="2" data-cover="https://i.imgur.com/fVQpLqT.jpeg" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">SAEY:Ly - Starlight</option>
-                <option value="3" data-cover="https://i.imgur.com/A6jF7eK.jpeg" data-src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3">SAEY:Ly - Neon Dreams</option>
-            </select>
-        </div>
-    </section>
+  <section id="lyrics-section">
+    <h2>🎤 Lyrics Preview</h2>
+    <div class="lyrics" id="lyricsBox">
+      <h3>Song Title</h3>
+      <p id="lyrics">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis...</p>
+    </div>
+  </section>
 
-    ---
+  <section id="shop-section">
+    <h2>🛒 SAEY:Ly Store</h2>
+    <div class="shop">
+      <div class="item">
+        <img src="https://i.imgur.com/0DElr0H.jpeg" alt="merch">
+        <h4>Official Hoodie</h4>
+        <p>$40</p>
+        <button class="btn" onclick="addToCart('Official Hoodie',40)">Add to Cart</button>
+      </div>
+      <div class="item">
+        <img src="https://i.imgur.com/EHyR2nP.jpeg" alt="merch">
+        <h4>SAEY:Ly Cap</h4>
+        <p>$25</p>
+        <button class="btn" onclick="addToCart('SAEY:Ly Cap',25)">Add to Cart</button>
+      </div>
+      <div class="item">
+        <img src="https://i.imgur.com/QcxJ7dG.jpeg" alt="merch">
+        <h4>Poster Set</h4>
+        <p>$15</p>
+        <button class="btn" onclick="addToCart('Poster Set',15)">Add to Cart</button>
+      </div>
+    </div>
+    <div class="cart" id="cart">
+      <h3>Your Cart</h3>
+      <ul id="cartItems"></ul>
+      <p id="total">Total: $0</p>
+      <button class="btn">Checkout</button>
+    </div>
+  </section>
 
-    <section id="lyrics-section">
-        <h2>🎤 Lyrics Preview</h2>
-        <div class="lyrics">
-            <h3>Lirik Lagu</h3>
-            <p id="lyrics">Pilih lagu untuk melihat lirik...</p>
-        </div>
-    </section>
+  <script>
+    // Vinyl
+    const vinyl = document.getElementById('vinyl');
+    const player = document.getElementById('player');
+    const cover = document.getElementById('cover');
+    const songList = document.getElementById('songList');
 
-    ---
+    player.onplay = () => vinyl.classList.add('playing');
+    player.onpause = () => vinyl.classList.remove('playing');
 
-    <section id="countdown-section">
-        <h2>📅 New Album Countdown</h2>
-        <div class="countdown" id="countdown">
-            <p>Album Baru Rilis Dalam:</p>
-            <p id="countdown-text">Memuat...</p>
-        </div>
-    </section>
+    songList.addEventListener('change', () => {
+      const option = songList.options[songList.selectedIndex];
+      cover.src = option.dataset.cover;
+      player.src = option.dataset.src;
+      player.play();
+    });
 
-    ---
+    // Countdown
+    const countdown = document.getElementById('countdown');
+    const eventDate = new Date('2025-12-31T00:00:00').getTime();
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+      if (distance < 0) { countdown.innerText = '🎉 Event Started!'; return; }
+      const days = Math.floor(distance / (1000*60*60*24));
+      const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+      const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+      const seconds = Math.floor((distance%(1000*60))/1000);
+      countdown.innerText = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    },1000);
 
-    <section id="store-section">
-        <h2>🛍️ SAEY:Ly Store</h2>
-        <div class="shop">
-            <div class="item">
-                <img src="https://i.imgur.com/0DElr0H.jpeg" alt="Official Hoodie">
-                <h4>Official Hoodie</h4>
-                <p>$40</p>
-                <button class="btn" onclick="addToCart('Official Hoodie', 40)">Add to Cart</button>
-            </div>
-            <div class="item">
-                <img src="https://i.imgur.com/EHyR2nP.jpeg" alt="SAEY:Ly Cap">
-                <h4>SAEY:Ly Cap</h4>
-                <p>$25</p>
-                <button class="btn" onclick="addToCart('SAEY:Ly Cap', 25)">Add to Cart</button>
-            </div>
-            <div class="item">
-                <img src="https://i.imgur.com/QcxJ7dG.jpeg" alt="Poster Set">
-                <h4>Poster Set</h4>
-                <p>$15</p>
-                <button class="btn" onclick="addToCart('Poster Set', 15)">Add to Cart</button>
-            </div>
-            <div class="item">
-                <img src="https://i.imgur.com/R3p5zXF.jpeg" alt="Vinyl Record">
-                <h4>Vinyl Album</h4>
-                <p>$35</p>
-                <button class="btn" onclick="addToCart('Vinyl Album', 35)">Add to Cart</button>
-            </div>
-        </div>
-        <div class="cart" id="cart">
-            <h3>Your Cart</h3>
-            <ul id="cartItems"></ul>
-            <p id="total">Total: $0</p>
-            <button class="btn">Checkout</button>
-        </div>
-    </section>
+    // Shop cart
+    const cartItems = document.getElementById('cartItems');
+    const total = document.getElementById('total');
+    let cart = [];
 
-    ---
-
-    <section id="chat-section">
-        <h2>💬 Fan Chat</h2>
-        <div class="chatbox">
-            <div id="chat-messages"></div>
-            <div class="chat-input">
-                <input type="text" id="chat-input" placeholder="Ketik pesan Anda...">
-                <button id="chat-send">Kirim</button>
-            </div>
-        </div>
-    </section>
-
-    ---
-
-    <section id="gallery-section">
-        <h2>📸 Gallery</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item">
-                <img src="https://i.imgur.com/FjK1tXG.jpeg" alt="Gallery Photo 1">
-            </div>
-            <div class="gallery-item">
-                <video controls src="https://assets.mixkit.co/videos/preview/mixkit-girl-dancing-on-street-with-friends-40890-large.mp4"></video>
-            </div>
-            <div class="gallery-item">
-                <img src="https://i.imgur.com/8Qp4w0K.jpeg" alt="Gallery Photo 2">
-            </div>
-            <div class="gallery-item">
-                <img src="https://i.imgur.com/oK1Gz2C.jpeg" alt="Gallery Photo 3">
-            </div>
-        </div>
-    </section>
-
-    ---
-
-    <section id="quiz-section">
-        <h2>🎮 SAEY:Ly Quiz</h2>
-        <div class="quiz-container">
-            <p id="question"></p>
-            <div id="answers"></div>
-            <button class="btn" id="next-btn" style="display: none;">Next Question</button>
-            <p id="quiz-result"></p>
-        </div>
-    </section>
-
-    <script>
-        // Theme Switcher
-        const themeToggle = document.getElementById('theme-toggle');
-        themeToggle.addEventListener('click', () => {
-            document.body.classList.toggle('light-theme');
-            const isLightTheme = document.body.classList.contains('light-theme');
-            themeToggle.innerHTML = isLightTheme ? '<i class="fas fa-moon"></i>' : '<i class="fas fa-sun"></i>';
-        });
-
-        // Vinyl & Player
-        const vinyl = document.getElementById('vinyl');
-        const player = document.getElementById('player');
-        const cover = document.getElementById('cover');
-        const songList = document.getElementById('songList');
-        const lyricsBox = document.getElementById('lyrics');
-        const lyricsTitle = document.querySelector('#lyrics-section h3');
-
-        const songs = [
-            {
-                title: "Echoes of Time",
-                cover: "https://i.imgur.com/6rK2Kqb.jpeg",
-                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3",
-                lyrics: "Every moment, a memory\nFading like a dream, but you're still here with me\nAcross the stars, a symphony\nEchoes of time, for you and me..."
-            },
-            {
-                title: "Starlight",
-                cover: "https://i.imgur.com/fVQpLqT.jpeg",
-                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3",
-                lyrics: "Under the starlight, we're all alone\nLost in the night, finding our way home\nDon't let go, just hold me tight\nShine like the starlight, burning so bright..."
-            },
-            {
-                title: "Neon Dreams",
-                cover: "https://i.imgur.com/A6jF7eK.jpeg",
-                src: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3",
-                lyrics: "City lights blur, a canvas of sound\nLost in the neon, spinning all around\nLiving a fantasy, a fever dream\nChasing the sunlight, a fading gleam..."
-            }
-        ];
-
-        songList.addEventListener('change', () => {
-            const index = songList.value - 1;
-            const selectedSong = songs[index];
-            if (selectedSong) {
-                cover.src = selectedSong.cover;
-                player.src = selectedSong.src;
-                player.load();
-                player.play();
-                lyricsTitle.innerText = `Lirik Lagu: ${selectedSong.title}`;
-                lyricsBox.innerText = selectedSong.lyrics;
-            }
-        });
-
-        player.onplay = () => vinyl.classList.add('playing');
-        player.onpause = () => vinyl.classList.remove('playing');
-        player.onended = () => vinyl.classList.remove('playing');
-
-        // Countdown
-        const countdownText = document.getElementById('countdown-text');
-        const eventDate = new Date('2026-03-25T10:00:00').getTime(); // New album release date
-
-        setInterval(() => {
-            const now = new Date().getTime();
-            const distance = eventDate - now;
-
-            if (distance < 0) {
-                countdownText.innerHTML = '🎉 Album Sudah Rilis! 🎉';
-                return;
-            }
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            countdownText.innerHTML = `<span>${days}</span>d <span>${hours}</span>h <span>${minutes}</span>m <span>${seconds}</span>s`;
-        }, 1000);
-
-        // Shop Cart
-        const cartItems = document.getElementById('cartItems');
-        const total = document.getElementById('total');
-        let cart = [];
-
-        function addToCart(item, price) {
-            cart.push({ item, price });
-            renderCart();
-            alert(`${item} telah ditambahkan ke keranjang!`);
-        }
-
-        function renderCart() {
-            cartItems.innerHTML = '';
-            let sum = 0;
-            cart.forEach(c => {
-                const li = document.createElement('li');
-                li.innerText = `${c.item} - $${c.price}`;
-                cartItems.appendChild(li);
-                sum += c.price;
-            });
-            total.innerText = `Total: $${sum}`;
-        }
-        
-        // Chatbox
-        const chatMessages = document.getElementById('chat-messages');
-        const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
-
-        chatSend.addEventListener('click', sendMessage);
-        chatInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                sendMessage();
-            }
-        });
-
-        function sendMessage() {
-            const message = chatInput.value.trim();
-            if (message) {
-                const p = document.createElement('p');
-                p.innerText = `[Guest]: ${message}`;
-                chatMessages.appendChild(p);
-                chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
-                chatInput.value = '';
-            }
-        }
-        
-        // Mini Game/Quiz
-        const quizContainer = document.querySelector('.quiz-container');
-        const questionElement = document.getElementById('question');
-        const answersElement = document.getElementById('answers');
-        const nextButton = document.getElementById('next-btn');
-        const resultElement = document.getElementById('quiz-result');
-
-        let currentQuestionIndex = 0;
-        let score = 0;
-        
-        const quizQuestions = [
-            {
-                question: "Siapa nama lengkap SAEY:Ly?",
-                answers: ["Aisyah Liyana", "Sarah Elyana", "Siti Aisyah", "Sally Liyanti"],
-                correct: "Sarah Elyana"
-            },
-            {
-                question: "Album pertama SAEY:Ly berjudul apa?",
-                answers: ["Echoes of Time", "Starlight", "Melody of Dreams", "Infinity"],
-                correct: "Echoes of Time"
-            },
-            {
-                question: "Kapan tanggal rilis album baru SAEY:Ly?",
-                answers: ["25 Maret 2026", "10 Juni 2026", "5 Januari 2027", "30 Februari 2026"],
-                correct: "25 Maret 2026"
-            }
-        ];
-        
-        function startQuiz() {
-            currentQuestionIndex = 0;
-            score = 0;
-            resultElement.innerText = '';
-            showQuestion();
-            nextButton.style.display = 'none';
-        }
-
-        function showQuestion() {
-            const currentQuestion = quizQuestions[currentQuestionIndex];
-            questionElement.innerText = currentQuestion.question;
-            answersElement.innerHTML = '';
-            currentQuestion.answers.forEach(answer => {
-                const button = document.createElement('button');
-                button.innerText = answer;
-                button.classList.add('btn');
-                button.addEventListener('click', () => selectAnswer(answer, currentQuestion.correct));
-                answersElement.appendChild(button);
-            });
-        }
-        
-        function selectAnswer(selectedAnswer, correctAnswer) {
-            const buttons = answersElement.querySelectorAll('.btn');
-            buttons.forEach(button => {
-                if (button.innerText === correctAnswer) {
-                    button.style.background = 'green';
-                } else if (button.innerText === selectedAnswer) {
-                    button.style.background = 'red';
-                }
-                button.disabled = true;
-            });
-
-            if (selectedAnswer === correctAnswer) {
-                score++;
-            }
-            
-            nextButton.style.display = 'block';
-            nextButton.onclick = () => {
-                currentQuestionIndex++;
-                if (currentQuestionIndex < quizQuestions.length) {
-                    showQuestion();
-                    nextButton.style.display = 'none';
-                } else {
-                    endQuiz();
-                }
-            };
-        }
-
-        function endQuiz() {
-            questionElement.innerText = "Kuis Selesai!";
-            answersElement.innerHTML = '';
-            nextButton.style.display = 'none';
-            resultElement.innerText = `Skor Anda: ${score} dari ${quizQuestions.length}`;
-        }
-        
-        // Start the quiz when the page loads
-        startQuiz();
-    </script>
+    function addToCart(item, price) {
+      cart.push({item, price});
+      renderCart();
+    }
+    function renderCart(){
+      cartItems.innerHTML = '';
+      let sum=0;
+      cart.forEach(c=>{
+        const li = document.createElement('li');
+        li.innerText = `${c.item} - $${c.price}`;
+        cartItems.appendChild(li);
+        sum+=c.price;
+      });
+      total.innerText = `Total: $${sum}`;
+    }
+  </script>
 </body>
 </html>
