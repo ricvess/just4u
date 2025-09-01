@@ -1,380 +1,257 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SAEY:Ly — JUST 36:9 U</title>
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SAEY:Ly — JUST 36:9 U (Microsite)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Space+Grotesk:wght@300;400;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      /* default (Dark Neon) */
-      --bg: #0b0c10;
-      --fg: #f2f2f2;
-      --muted: #b7b7b7;
-      --accent: #ffd86b;
-      --accent-2: #6df1ff;
-      --card: #12141a;
-      --shadow: rgba(0,0,0,.35);
-      --ring: rgba(255,216,107,.35);
-      --grain: rgba(255,255,255,0.03);
-    }
+    :root{ --bg:#0b0c10; --fg:#f2f2f2; --muted:#b7b7b7; --accent:#ffd86b; --accent2:#6df1ff; --card:#12141a; --glass: rgba(255,255,255,0.04); }
+    *{box-sizing:border-box} html,body{height:100%} body{margin:0;font-family:Inter, 'Space Grotesk', system-ui, -apple-system; background:var(--bg); color:var(--fg); overflow-x:hidden}
+    /* Background + grain */
+    .bg{position:fixed;inset:0;z-index:-10;background:radial-gradient(800px 600px at 10% 10%, #14213d44 0%, transparent 60%), radial-gradient(900px 600px at 90% 30%, #f59e0b33 0%, transparent 60%), var(--bg);filter:saturate(1.05); animation:bgShift 16s ease-in-out infinite alternate}
+    @keyframes bgShift{to{filter:hue-rotate(18deg) saturate(1.15)}}
+    .grain{position:fixed;inset:0;z-index:-5;pointer-events:none;background:repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 3px)}
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: 'Space Grotesk', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      color: var(--fg);
-      background: var(--bg);
-      overflow-x: hidden;
-    }
+    /* Layout */
+    header.hero{min-height:86vh;display:grid;place-items:center;padding:48px 20px;text-align:center}
+    .hero-inner{max-width:1100px;width:100%}
+    .logo{font-family:'Cinzel Decorative', serif;letter-spacing:.06em;margin:0}
+    .title-large{font-size:clamp(36px,7vw,84px);font-weight:900;color:var(--accent);text-shadow:0 12px 30px rgba(0,0,0,.6)}
+    .subtitle{margin-top:10px;font-size:clamp(14px,2.2vw,18px);color:var(--muted)}
+    .chipbar{display:flex;gap:10px;justify-content:center;margin-top:22px;flex-wrap:wrap}
+    .chip{padding:10px 14px;border-radius:999px;background:var(--glass);border:1px solid rgba(255,255,255,0.06);cursor:pointer}
 
-    /* Animated background gradients per theme will be applied to .bg */
-    .bg {
-      position: fixed; inset: 0; z-index: -2;
-      background: radial-gradient(1200px 800px at 10% 10%, #1a2a6c 0%, transparent 60%),
-                  radial-gradient(1000px 600px at 90% 30%, #fdbb2d55 0%, transparent 60%),
-                  radial-gradient(900px 700px at 40% 90%, #22c1c355 0%, transparent 60%),
-                  var(--bg);
-      filter: saturate(1.05) contrast(1.05);
-      animation: bgShift 18s ease-in-out infinite alternate;
-    }
-    @keyframes bgShift { to { filter: hue-rotate(20deg) saturate(1.2); } }
+    /* Container and cards */
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:22px;margin:20px 0}
+    h2.section{font-family:'Cinzel Decorative', serif;margin:0 0 12px 0}
+    p.lead{color:var(--muted);margin:0 0 10px}
 
-    /* Soft film grain overlay */
-    .grain { position: fixed; inset: 0; pointer-events:none; z-index:-1;
-      background:
-        repeating-linear-gradient(0deg, var(--grain) 0px, var(--grain) 1px, transparent 2px, transparent 3px),
-        repeating-linear-gradient(90deg, var(--grain) 0px, var(--grain) 1px, transparent 2px, transparent 3px);
-      mix-blend-mode: soft-light;
-      animation: grainMove 2.4s steps(2) infinite;
-    }
-    @keyframes grainMove { from { transform: translate(0,0);} to { transform: translate(3px,-3px);} }
+    /* Countdown */
+    .countdown{font-weight:700;font-size:20px;color:var(--accent);margin-top:12px}
 
-    header.hero {
-      min-height: 92vh; display: grid; place-items: center; text-align: center; padding: 48px 20px 24px;
-      position: relative;
-    }
+    /* Calendar grid */
+    .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:8px}
+    .cal-day{background:rgba(255,255,255,0.02);padding:10px;border-radius:8px;text-align:center;color:var(--muted)}
+    .cal-day.header{font-weight:700;color:var(--fg);background:transparent}
+    .cal-day.active{background:linear-gradient(180deg,var(--accent),rgba(255,255,255,0.02));color:#111;font-weight:700;box-shadow:0 8px 28px rgba(255,216,107,0.12)}
 
-    .logo {
-      font-family: 'Cinzel Decorative', serif;
-      letter-spacing: .06em;
-      text-shadow: 0 10px 30px var(--shadow);
-    }
+    /* Vinyl player */
+    .vinyl-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+    .vinyl{width:160px;height:160px;border-radius:50%;background:conic-gradient(#111 0 6%, #222 6% 12%, #111 12% 18%, #333 18% 24%, #111 24%);box-shadow:0 20px 60px rgba(0,0,0,.6);display:grid;place-items:center;position:relative}
+    .vinyl .label{width:62%;height:62%;border-radius:50%;background:linear-gradient(180deg,var(--accent),var(--accent2));display:grid;place-items:center;color:#0b0c10;font-weight:700;font-size:12px}
+    .vinyl.playing{animation:spin 3s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .tonearm{width:160px;height:6px;background:linear-gradient(90deg,#bdbdbd,#777);border-radius:6px;transform-origin:left center;transform: rotate(-30deg);transition:transform .35s ease}
+    .tonearm.play{transform:rotate(-6deg)}
 
-    .title-stack { line-height: 1.06; }
-    .title-giant {
-      font-size: clamp(40px, 8vw, 92px);
-      font-weight: 900;
-      margin: 0;
-      color: var(--accent);
-      filter: drop-shadow(0 12px 40px var(--shadow));
-    }
-    .title-alt {
-      font-size: clamp(22px, 3.4vw, 40px);
-      margin: 10px 0 0;
-      color: var(--accent-2);
-      opacity: .92;
-    }
+    /* Store grid */
+    .store-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px}
+    .product{padding:14px;border-radius:12px;background:rgba(255,255,255,0.02);text-align:center}
+    .product img{width:100%;border-radius:10px;height:150px;object-fit:cover}
+    .price{font-weight:700;margin-top:8px}
+    .buy{margin-top:8px;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.08);cursor:pointer}
 
-    .subtitle { margin-top: 16px; font-size: clamp(14px, 2.2vw, 18px); color: var(--muted); }
+    /* Dock */
+    .dock{position:fixed;right:16px;bottom:16px;display:flex;flex-direction:column;gap:10px;z-index:20}
+    .dock .panel{background:var(--card);border-radius:12px;padding:10px;border:1px solid rgba(255,255,255,0.06)}
+    .dock select{background:transparent;color:var(--fg);border:none;padding:6px;outline:none}
 
-    .chipbar {
-      display:flex; gap:10px; justify-content:center; align-items:center; flex-wrap: wrap; margin-top: 26px;
-    }
-    .chip {
-      border: 1px solid var(--ring); color: var(--fg); background: rgba(255,255,255,.02);
-      padding: 10px 14px; border-radius: 999px; backdrop-filter: blur(4px);
-      cursor: pointer; transition: transform .15s ease, background .2s ease, border-color .2s ease;
-      box-shadow: 0 10px 20px -10px var(--shadow);
-      user-select: none;
-    }
-    .chip:hover { transform: translateY(-2px); background: rgba(255,255,255,.05); }
-    .chip.active { border-color: var(--accent); box-shadow: 0 12px 30px -8px var(--shadow); }
+    /* Confetti / easter egg */
+    .confetti{pointer-events:none;position:fixed;inset:0;z-index:30;overflow:hidden}
+    .confetti .piece{position:absolute;width:10px;height:16px;opacity:0.95}
 
-    /* Panels */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px; }
-    .card {
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 24px; padding: 28px; box-shadow: 0 20px 60px -30px var(--shadow);
-      backdrop-filter: blur(8px);
-    }
-    section { margin: 26px 0 26px; }
-    h2.section-title { font-family: 'Cinzel Decorative', serif; font-size: clamp(22px, 3vw, 34px); margin: 0 0 14px; }
-    p { line-height: 1.7; color: var(--fg); opacity: .95; }
-
-    /* Typewriter */
-    .typewriter { font-size: clamp(16px, 2.3vw, 22px); font-style: italic; border-right: 2px solid var(--accent); white-space: nowrap; overflow: hidden; padding-right: 4px; }
-    @keyframes caret { 50% { border-color: transparent; }}
-
-    /* Floating retro shapes */
-    .floaty { position: absolute; width: 18px; height: 18px; border-radius: 50%; opacity: .6; filter: blur(.4px);
-      background: radial-gradient(circle at 30% 30%, var(--accent), transparent 70%);
-      animation: floaty 8s ease-in-out infinite;
-    }
-    @keyframes floaty { 0% { transform: translateY(0) translateX(0);} 50% { transform: translateY(-30px) translateX(10px);} 100% { transform: translateY(0) translateX(0);} }
-
-    /* Footer */
-    footer { text-align: center; padding: 40px 20px 80px; color: var(--muted); }
-
-    /* Theme variants using data-theme on body */
-    body[data-theme="dark-neon"] { --bg:#0b0c10; --fg:#f2f2f2; --muted:#b7b7b7; --accent:#ffd86b; --accent-2:#6df1ff; --card:#12141a; --ring:rgba(255,216,107,.35); }
-    body[data-theme="retro-pink"] { --bg:#1b0f17; --fg:#fff3f8; --muted:#ffdeef; --accent:#ffa4d1; --accent-2:#ffd86b; --card:#2a1424; --ring:rgba(255,164,209,.4); }
-    body[data-theme="indie-beige"] { --bg:#1a1816; --fg:#fff8ee; --muted:#e9dccf; --accent:#d7b889; --accent-2:#a3e1d1; --card:#25211d; --ring:rgba(215,184,137,.4); }
-    body[data-theme="teal-orange"] { --bg:#0f1b1a; --fg:#eafffb; --muted:#cdebe4; --accent:#f4a259; --accent-2:#2ec4b6; --card:#112422; --ring:rgba(46,196,182,.35); }
-    body[data-theme="mono-minimal"] { --bg:#0f0f0f; --fg:#f5f5f5; --muted:#cfcfcf; --accent:#f5f5f5; --accent-2:#bdbdbd; --card:#171717; --ring:rgba(255,255,255,.22); }
-
-    /* Background variations per theme */
-    body[data-theme="retro-pink"] .bg { background:
-      radial-gradient(1000px 600px at 15% 15%, #ff7eb399 0%, transparent 60%),
-      radial-gradient(900px 600px at 85% 35%, #ffd86b55 0%, transparent 60%),
-      radial-gradient(900px 700px at 40% 90%, #ffb6c199 0%, transparent 60%), var(--bg);
-    }
-    body[data-theme="indie-beige"] .bg { background:
-      radial-gradient(1100px 700px at 20% 20%, #d7b88988 0%, transparent 60%),
-      radial-gradient(900px 600px at 80% 30%, #a3e1d188 0%, transparent 60%),
-      radial-gradient(900px 700px at 40% 90%, #6c584c66 0%, transparent 60%), var(--bg);
-    }
-    body[data-theme="teal-orange"] .bg { background:
-      radial-gradient(1000px 600px at 15% 15%, #2ec4b6aa 0%, transparent 60%),
-      radial-gradient(900px 600px at 85% 35%, #f4a25988 0%, transparent 60%),
-      radial-gradient(900px 700px at 40% 90%, #3a506baa 0%, transparent 60%), var(--bg);
-    }
-    body[data-theme="mono-minimal"] .bg { background:
-      radial-gradient(1000px 600px at 15% 15%, #ffffff18 0%, transparent 60%),
-      radial-gradient(900px 600px at 85% 35%, #ffffff10 0%, transparent 60%),
-      radial-gradient(900px 700px at 40% 90%, #ffffff0e 0%, transparent 60%), var(--bg);
-    }
-
-    /* Utility */
-    .center { display:flex; align-items:center; justify-content:center; }
-    .row { display:flex; gap: 14px; flex-wrap: wrap; }
-    .muted { color: var(--muted); }
-    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent); margin: 26px 0; }
-
-    /* CTA button */
-    .btn { border:1px solid var(--ring); color: var(--fg); background: transparent; padding:12px 18px; border-radius:14px; cursor:pointer; transition: .2s; }
-    .btn:hover { transform: translateY(-1px); box-shadow:0 14px 28px -18px var(--shadow); }
-
-    /* Mini player */
-    .player { display:flex; align-items:center; gap:12px; background: var(--card); border:1px solid rgba(255,255,255,.12); border-radius: 16px; padding: 10px 14px; }
-    .player .title { font-weight:600; }
-
-    /* Control dock */
-    .dock { position: fixed; right: 16px; bottom: 16px; display:flex; gap:10px; flex-direction: column; z-index: 10; }
-    .dock .panel { background: var(--card); border:1px solid rgba(255,255,255,.14); border-radius:16px; padding: 10px 12px; box-shadow: 0 20px 40px -28px var(--shadow); }
-    .dock label { font-size: 12px; color: var(--muted); display:block; margin-bottom: 6px; }
-    .dock select, .dock input[type="range"] { width: 180px; background: transparent; color: var(--fg); }
-    .dock option { color: #111; }
-
-    /* Responsive tune */
-    @media(max-width:640px){ .chipbar{gap:8px} .chip{padding:9px 12px} .dock select{width:160px} }
+    /* Responsive small tweaks */
+    @media(max-width:760px){ .vinyl{width:120px;height:120px} .vinyl .label{font-size:11px} }
   </style>
 </head>
-<body data-theme="dark-neon">
+<body data-theme="dark">
   <div class="bg"></div>
   <div class="grain"></div>
 
-  <!-- Floating shapes container -->
-  <div id="floaties"></div>
+  <!-- Confetti container (easter egg) -->
+  <div id="confetti" class="confetti" aria-hidden="true"></div>
 
   <header class="hero">
-    <div class="title-stack logo" id="heroTitle">
-      <h1 class="title-giant" id="phase1">36 ÷ 9</h1>
-      <h2 class="title-alt" id="phase2" style="opacity:0; transform: translateY(6px);">equals <span style="font-variant-numeric: lining-nums;">4</span></h2>
-      <h1 class="title-giant" id="phase3" style="display:none;">JUST 36:9 U</h1>
-      <h1 class="title-giant" id="phase4" style="display:none;">JUST FOR U</h1>
-      <div class="subtitle">“36 divide 9, and my heart just for you”</div>
-      <div class="chipbar" style="margin-top:22px;">
-        <div class="chip active" id="enterBtn">Enter Site</div>
-        <a class="chip" href="#about">About</a>
-        <a class="chip" href="#lyrics">Lyrics</a>
-        <a class="chip" href="#gallery">Gallery</a>
+    <div class="hero-inner">
+      <h1 class="logo title-large" id="logo">JUST 36:9 U</h1>
+      <div class="subtitle">“36 divide 9, and my heart just for you” — SAEY:Ly comeback</div>
+      <div class="countdown" id="countdown">Loading countdown...</div>
+      <div class="chipbar">
+        <div class="chip" id="enterBtn">Enter</div>
+        <div class="chip" id="replayAnim">Replay Title</div>
+        <a class="chip" href="#calendar">Calendar</a>
+        <a class="chip" href="#vinyl">Vinyl Player</a>
+        <a class="chip" href="#store">Store</a>
       </div>
     </div>
   </header>
 
   <main class="container">
-    <section id="about" class="card">
-      <h2 class="section-title">About this comeback</h2>
-      <p>
-        SAEY:Ly kembali dengan single <strong>“JUST 36:9 U”</strong> — sebuah retro‑indie anthem dengan twist numerik.
-        <br/>
-        <strong>36 ÷ 9 = 4 → FOR</strong>. Diucapkan sebagai “Just for U”.
-        Lagu ini ditulis sebagai pesan yang sederhana namun personal; sebuah kode kecil yang akan terasa spesial ketika kamu mengetahuinya.
-      </p>
+    <!-- About & snippet -->
+    <section class="card" id="about">
+      <h2 class="section">About</h2>
+      <p class="lead">A retro‑indie single that plays on a tiny math twist — 36 ÷ 9 = 4 → "for". Personal, playful, and warm.</p>
       <div class="divider"></div>
-      <div class="row center">
-        <div class="player">
-          <button class="btn" id="playBtn">▶ Play snippet</button>
-          <div>
-            <div class="title">JUST 36:9 U — teaser</div>
-            <div class="muted" style="font-size:12px">(Ganti src audio di kode jika sudah ada)</div>
+      <div class="vinyl-wrap">
+        <div>
+          <div id="vinyl" class="vinyl" role="button" aria-pressed="false" title="Click to play / pause">
+            <div class="label">SAEY:Ly<br><small>Just 36:9 U</small></div>
           </div>
-          <audio id="audio" preload="none">
-            <!-- TODO: Ganti dengan file kamu, contoh: <source src="/audio/just-369u-teaser.mp3" type="audio/mpeg"> -->
+        </div>
+        <div style="flex:1;min-width:220px">
+          <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+            <div id="playBtn" class="chip">▶ Play teaser</div>
+            <div id="pauseBtn" class="chip">⏸ Pause</div>
+            <div id="volWrap" style="display:flex;align-items:center;gap:8px;margin-left:8px"><label class="muted">Vol</label><input id="vol" type="range" min="0" max="1" step="0.01" value="1"></div>
+          </div>
+          <p class="muted">Click the vinyl to toggle play; when audio plays the disc animates like a record.</p>
+          <!-- Hidden audio element: add source file -->
+          <audio id="audio" preload="auto">
+            <!-- Example: <source src="/audio/just-369u-teaser.mp3" type="audio/mpeg"> -->
           </audio>
         </div>
       </div>
     </section>
 
-    <section id="lyrics" class="card">
-      <h2 class="section-title">Lyrics preview</h2>
-      <p id="typewriter" class="typewriter" aria-live="polite"></p>
+    <!-- Calendar / Countdown -->
+    <section class="card" id="calendar">
+      <h2 class="section">Calendar & Countdown</h2>
+      <p class="lead">Mark important dates: teaser drop, single release, live stream. Click a date to set it as the countdown target.</p>
+      <div id="calendarGrid" class="calendar" aria-hidden="false"></div>
+      <div style="margin-top:14px">Selected date: <strong id="selectedDate">—</strong></div>
     </section>
 
-    <section id="gallery" class="card">
-      <h2 class="section-title">Gallery</h2>
-      <p class="muted">Taruh poster/teaser di sini (ganti <code>src</code> gambarnya).</p>
-      <div class="row center" style="justify-content:center;">
-        <img src="https://images.unsplash.com/photo-1549887534-1541e9326642?q=80&w=1200&auto=format&fit=crop" alt="Poster teaser" style="width:100%; max-width:520px; border-radius:18px; box-shadow:0 24px 70px -40px var(--shadow); border:1px solid rgba(255,255,255,.14)"/>
+    <!-- Lyrics preview -->
+    <section class="card" id="lyrics">
+      <h2 class="section">Lyrics Preview</h2>
+      <p class="lead">Typewriter preview:</p>
+      <div id="typewriter" style="font-style:italic;font-size:18px;min-height:42px;color:var(--muted)"></div>
+    </section>
+
+    <!-- Store / Merch -->
+    <section class="card" id="store">
+      <h2 class="section">Merch Store (Mockup)</h2>
+      <p class="lead">This is a demo store layout. Add real e‑commerce links or connect to a payment provider when ready.</p>
+      <div class="store-grid" id="storeGrid">
+        <div class="product">
+          <img src="https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop" alt="T-Shirt">
+          <div style="margin-top:8px">JUST 36:9 U Tee</div>
+          <div class="price">Rp 149.000</div>
+          <button class="buy" data-product="Tee">Buy</button>
+        </div>
+        <div class="product">
+          <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=800&auto=format&fit=crop" alt="Vinyl Mockup">
+          <div style="margin-top:8px">Limited Vinyl</div>
+          <div class="price">Rp 299.000</div>
+          <button class="buy" data-product="Vinyl">Buy</button>
+        </div>
+        <div class="product">
+          <img src="https://images.unsplash.com/photo-1511974035430-5de47d3b95da?q=80&w=800&auto=format&fit=crop" alt="Tote">
+          <div style="margin-top:8px">Canvas Tote</div>
+          <div class="price">Rp 89.000</div>
+          <button class="buy" data-product="Tote">Buy</button>
+        </div>
       </div>
     </section>
+
   </main>
 
-  <footer>
-    © 2025 SAEY:Ly. All rights reserved.
-  </footer>
+  <footer style="text-align:center;padding:36px 12px;color:var(--muted)">© 2025 SAEY:Ly. All rights reserved.</footer>
 
-  <!-- Control Dock: Themes & FX -->
-  <div class="dock">
+  <!-- Control Dock -->
+  <div class="dock" aria-hidden="false">
     <div class="panel">
-      <label for="themeSelect">Theme</label>
-      <select id="themeSelect" aria-label="Select theme">
-        <option value="dark-neon">Dark Neon</option>
-        <option value="retro-pink">Retro Pink</option>
-        <option value="indie-beige">Indie Beige</option>
-        <option value="teal-orange">Teal & Orange</option>
-        <option value="mono-minimal">Mono Minimal</option>
+      <label for="themeSelect" style="font-size:12px;color:var(--muted);">Theme</label>
+      <select id="themeSelect">
+        <option value="dark">Dark Neon</option>
+        <option value="retro">Retro Pink</option>
+        <option value="beige">Indie Beige</option>
+        <option value="teal">Teal & Orange</option>
+        <option value="mono">Mono</option>
       </select>
     </div>
     <div class="panel">
-      <label for="shapeCount">Floating shapes</label>
-      <input id="shapeCount" type="range" min="0" max="30" value="12" />
+      <label style="font-size:12px;color:var(--muted);">Floaties</label>
+      <input id="floatCount" type="range" min="0" max="30" value="10">
     </div>
   </div>
 
   <script>
-    // --- Hero staged animation (36 ÷ 9 -> 4 -> JUST 36:9 U -> JUST FOR U) ---
-    const p1 = document.getElementById('phase1');
-    const p2 = document.getElementById('phase2');
-    const p3 = document.getElementById('phase3');
-    const p4 = document.getElementById('phase4');
+    // ---------- Basic helpers ----------
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
 
-    function heroSequence(){
-      // phase 1 visible initially
-      setTimeout(()=>{
-        p2.style.transition = 'all .8s ease';
-        p2.style.opacity = '1';
-        p2.style.transform = 'translateY(0)';
-      }, 900);
-
-      setTimeout(()=>{
-        // swap to JUST 36:9 U
-        p1.style.transition='opacity .5s ease';
-        p2.style.transition='opacity .5s ease, transform .5s ease';
-        p1.style.opacity='0';
-        p2.style.opacity='0';
-        setTimeout(()=>{
-          p1.style.display='none';
-          p2.style.display='none';
-          p3.style.display='block';
-          p3.style.opacity='0';
-          requestAnimationFrame(()=>{ p3.style.transition='opacity .7s ease'; p3.style.opacity='1'; });
-        }, 500);
-      }, 2200);
-
-      setTimeout(()=>{
-        // final morph to JUST FOR U
-        p3.style.transition='opacity .6s ease';
-        p3.style.opacity='0';
-        setTimeout(()=>{
-          p3.style.display='none';
-          p4.style.display='block';
-          p4.style.opacity='0';
-          requestAnimationFrame(()=>{ p4.style.transition='opacity .7s ease'; p4.style.opacity='1'; });
-        }, 600);
-      }, 4200);
+    // ---------- Countdown target (default) ----------
+    let targetDate = new Date(); targetDate.setDate(targetDate.getDate()+14); // default 2 weeks
+    const countdownEl = document.getElementById('countdown');
+    function updateCountdown(){
+      const now = new Date().getTime();
+      const dist = targetDate.getTime() - now;
+      if(dist<=0){ countdownEl.textContent = 'Release is here!'; return }
+      const d = Math.floor(dist/(1000*60*60*24));
+      const h = Math.floor((dist%(1000*60*60*24))/(1000*60*60));
+      const m = Math.floor((dist%(1000*60*60))/(1000*60));
+      const s = Math.floor((dist%(1000*60))/1000);
+      countdownEl.textContent = `${d}d ${h}h ${m}m ${s}s until release`;
     }
-    heroSequence();
+    setInterval(updateCountdown,1000); updateCountdown();
 
-    // Re-run hero animation when clicking the title
-    document.getElementById('heroTitle').addEventListener('click', ()=>{
-      [p1,p2,p3,p4].forEach(el=>{ el.removeAttribute('style'); });
-      p2.style.opacity='0'; p2.style.transform='translateY(6px)'; p3.style.display='none'; p4.style.display='none';
-      heroSequence();
-    });
+    // ---------- Typewriter lyrics ----------
+    const LYR = '36 divide 9, and my heart just for you';
+    const tw = document.getElementById('typewriter'); let li=0;
+    function type(){ if(li<=LYR.length){ tw.textContent = LYR.slice(0,li++); setTimeout(type,40 + Math.random()*80) } else { setTimeout(()=>{ li=0; tw.textContent=''; type() },1800) } }
+    type();
 
-    // Smooth scroll from Enter
-    document.getElementById('enterBtn').addEventListener('click',()=>{
-      document.querySelector('#about').scrollIntoView({behavior:'smooth'});
-    });
+    // ---------- Hero interactions & easter egg confetti ----------
+    const logo = document.getElementById('logo');
+    logo.addEventListener('click', ()=> triggerConfetti());
 
-    // --- Typewriter effect ---
-    const LYRICS = '36 divide 9, and my heart just for you';
-    const tw = document.getElementById('typewriter');
-    let idx = 0; tw.style.animation = 'caret 1s step-end infinite';
-    function typeLoop(){
-      if(idx <= LYRICS.length){
-        tw.textContent = LYRICS.slice(0, idx++);
-        const delay = 38 + Math.random()*90; // human-ish
-        setTimeout(typeLoop, delay);
-      } else {
-        setTimeout(()=>{ idx = 0; tw.textContent=''; typeLoop(); }, 1800);
-      }
+    function triggerConfetti(){
+      const container = document.getElementById('confetti'); container.innerHTML='';
+      const colors = ['#ffd86b','#6df1ff','#ff9ad5','#9be7c4','#ffd1a9'];
+      for(let i=0;i<80;i++){ const p = document.createElement('div'); p.className='piece'; p.style.background=colors[i%colors.length]; p.style.left = (Math.random()*100)+'%'; p.style.top = '-10%'; p.style.transform = `rotate(${Math.random()*360}deg)`; p.style.animation = `fall ${2+Math.random()*1.8}s linear forwards ${Math.random()*0.2}s`; container.appendChild(p) }
+      // add keyframes runtime
+      const style = document.createElement('style'); style.textContent = `@keyframes fall{ to{ transform: translateY(120vh) rotate(360deg); opacity:0 } }`; document.head.appendChild(style);
+      setTimeout(()=> container.innerHTML = '', 3600);
     }
-    typeLoop();
 
-    // --- Theme switcher ---
-    const themeSelect = document.getElementById('themeSelect');
-    themeSelect.addEventListener('change', (e)=>{
-      document.body.setAttribute('data-theme', e.target.value);
-    });
+    // ---------- Vinyl player ----------
+    const vinyl = document.getElementById('vinyl'); const audio = document.getElementById('audio'); const playBtn = document.getElementById('playBtn'); const pauseBtn = document.getElementById('pauseBtn');
+    function togglePlay(){ if(audio.paused){ audio.play(); vinyl.classList.add('playing'); vinyl.setAttribute('aria-pressed','true'); } else { audio.pause(); vinyl.classList.remove('playing'); vinyl.setAttribute('aria-pressed','false'); } }
+    vinyl.addEventListener('click', togglePlay); playBtn.addEventListener('click', ()=>{ if(audio.querySelector('source')) togglePlay(); else alert('Tambahkan file audio di elemen <audio> pada kode untuk memutar teaser.') }); pauseBtn.addEventListener('click', ()=>{ if(!audio.paused) togglePlay() });
+    document.getElementById('vol').addEventListener('input', e=>{ audio.volume = e.target.value });
 
-    // --- Floating shapes ---
-    const floaties = document.getElementById('floaties');
-    const shapeRange = document.getElementById('shapeCount');
-
-    function rand(min, max){ return Math.random()*(max-min)+min; }
-
-    function drawFloaties(count){
-      floaties.innerHTML='';
-      for(let i=0;i<count;i++){
-        const d = document.createElement('div');
-        d.className = 'floaty';
-        const size = rand(10, 36);
-        d.style.width = size+'px'; d.style.height = size+'px';
-        d.style.left = rand(0, 100)+'vw';
-        d.style.top = rand(10, 85)+'vh';
-        d.style.opacity = rand(.25, .65);
-        d.style.animationDuration = rand(7, 15)+'s';
-        d.style.animationDelay = (-rand(0, 10))+'s';
-        // some will be squares/triangles-ish via clip-path
-        if(Math.random()>0.66){
-          d.style.borderRadius = Math.random()>0.5 ? '8px' : '0';
-          d.style.background = 'linear-gradient(135deg, var(--accent), transparent)';
-          if(Math.random()>0.5) d.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
-        }
-        floaties.appendChild(d);
-      }
+    // ---------- Calendar grid (this month) ----------
+    const cal = document.getElementById('calendarGrid'); function renderCalendar(year,month){ cal.innerHTML=''; const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; days.forEach(d=>{ const hd = document.createElement('div'); hd.className='cal-day header'; hd.textContent=d; cal.appendChild(hd) });
+      const first = new Date(year,month,1); const startDay = first.getDay(); const total = new Date(year,month+1,0).getDate();
+      for(let i=0;i<startDay;i++){ const empty = document.createElement('div'); empty.className='cal-day'; cal.appendChild(empty) }
+      for(let day=1;day<=total;day++){ const el = document.createElement('div'); el.className='cal-day'; el.textContent=day; el.tabIndex=0; el.addEventListener('click', ()=> selectDate(year,month,day,el)); cal.appendChild(el) }
     }
-    drawFloaties(parseInt(shapeRange.value,10));
-    shapeRange.addEventListener('input', (e)=> drawFloaties(parseInt(e.target.value,10)) );
+    function selectDate(y,m,d,el){ // mark active
+      $$('.cal-day').forEach(n=>n.classList.remove('active')); el.classList.add('active'); const sel = new Date(y,m,d); targetDate = new Date(sel.getFullYear(), sel.getMonth(), sel.getDate(), 0,0,0); document.getElementById('selectedDate').textContent = sel.toDateString(); updateCountdown(); }
+    const today = new Date(); renderCalendar(today.getFullYear(), today.getMonth());
 
-    // --- Mini audio player ---
-    const audio = document.getElementById('audio');
-    const playBtn = document.getElementById('playBtn');
-    let playing = false;
-    playBtn.addEventListener('click', ()=>{
-      if(!audio.querySelector('source')){
-        alert('Belum ada file audio. Tambahkan <source src="/path/to/your.mp3" type="audio/mpeg"> di elemen <audio> ya.');
-        return;
-      }
-      if(!playing){ audio.play(); playBtn.textContent='⏸ Pause'; } else { audio.pause(); playBtn.textContent='▶ Play snippet'; }
-      playing = !playing;
-    });
+    // ---------- Store buy buttons (mock) ----------
+    $$('#storeGrid .buy').forEach(btn=> btn.addEventListener('click', (e)=>{ const prod = e.target.dataset.product; alert(`Mock checkout: ${prod} — implement payment gateway to make this live.`) }));
+
+    // ---------- Theme & floaties ----------
+    const themeSelect = document.getElementById('themeSelect'); themeSelect.addEventListener('change', (e)=> setTheme(e.target.value));
+    function setTheme(name){ if(name==='retro'){ document.documentElement.style.setProperty('--bg','#1b0f17'); document.documentElement.style.setProperty('--accent','#ffa4d1'); document.documentElement.style.setProperty('--accent2','#ffd86b'); document.documentElement.style.setProperty('--muted','#ffdfe9'); } else if(name==='beige'){ document.documentElement.style.setProperty('--bg','#1a1816'); document.documentElement.style.setProperty('--accent','#d7b889'); document.documentElement.style.setProperty('--accent2','#a3e1d1'); document.documentElement.style.setProperty('--muted','#e9dccf'); } else if(name==='teal'){ document.documentElement.style.setProperty('--bg','#0f1b1a'); document.documentElement.style.setProperty('--accent','#f4a259'); document.documentElement.style.setProperty('--accent2','#2ec4b6'); document.documentElement.style.setProperty('--muted','#cdebe4'); } else if(name==='mono'){ document.documentElement.style.setProperty('--bg','#0f0f0f'); document.documentElement.style.setProperty('--accent','#f5f5f5'); document.documentElement.style.setProperty('--accent2','#bdbdbd'); document.documentElement.style.setProperty('--muted','#cfcfcf'); } else { document.documentElement.style.setProperty('--bg','#0b0c10'); document.documentElement.style.setProperty('--accent','#ffd86b'); document.documentElement.style.setProperty('--accent2','#6df1ff'); document.documentElement.style.setProperty('--muted','#b7b7b7'); } document.body.style.background = 'var(--bg)'; }
+    // Floaties
+    const floatCount = document.getElementById('floatCount'); function drawFloaties(n){ // small decorative elements around hero
+      const existing = document.getElementById('floatyWrap'); if(existing) existing.remove(); const wrap = document.createElement('div'); wrap.id='floatyWrap'; wrap.style.position='fixed'; wrap.style.inset='0'; wrap.style.pointerEvents='none'; wrap.style.zIndex=0; for(let i=0;i<n;i++){ const f = document.createElement('div'); f.style.position='absolute'; const size = 6 + Math.random()*28; f.style.width=size+'px'; f.style.height=size+'px'; f.style.left = Math.random()*100+'%'; f.style.top = Math.random()*70+'%'; f.style.borderRadius = Math.random()>0.6 ? '50%':'4px'; f.style.opacity = 0.6; f.style.background = ['#ffd86b','#6df1ff','#ff9ad5','#a3e1d1'][i%4]; f.style.filter='blur(.2px)'; f.style.transform = `translateY(0)`; f.animate([{transform:'translateY(0)'},{transform:`translateY(${20+Math.random()*80}px)`}],{duration:6000+Math.random()*9000,iterations:Infinity,direction:'alternate'}); wrap.appendChild(f) } document.body.appendChild(wrap); }
+    drawFloaties(parseInt(floatCount.value,10)); floatCount.addEventListener('input',(e)=> drawFloaties(parseInt(e.target.value,10)));
+
+    // ---------- Other small interactions ----------
+    document.getElementById('enterBtn').addEventListener('click', ()=> document.querySelector('#about').scrollIntoView({behavior:'smooth'}));
+    document.getElementById('replayAnim').addEventListener('click', ()=>{ triggerConfetti(); });
+
+    // Accessibility: keyboard for calendar
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.getElementById('confetti').innerHTML=''; } });
+
+    // Done
   </script>
 </body>
 </html>
